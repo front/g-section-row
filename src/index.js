@@ -1,12 +1,10 @@
-
 import { blocks, data, i18n } from 'wp';
 const { registerBlockType } = blocks;
 const { dispatch, select } = data;
 const { __ } = i18n;
 
 // TODO: Import each block herer
-import * as block1 from './section-block';
-
+import * as block1 from './section-layout-wrapper';
 
 // Category name and slug
 const category = {
@@ -17,11 +15,16 @@ const category = {
 // Register the new category and blocks
 export function registerBlocks () {
   // Add the new category to the list
-  const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);
-  dispatch('core/blocks').setCategories([ category, ...currentCategories ]);
+  const currentCategories = select('core/blocks')
+  .getCategories()
+  .filter(item => item.slug !== category.slug);
+  dispatch('core/blocks').setCategories([category, ...currentCategories]);
 
   // TODO: Register each block
-  registerBlockType(`${category.slug}/${block1.name}`, { category: category.slug, ...block1.settings });
+  registerBlockType(`${category.slug}/${block1.name}`, {
+    category: category.slug,
+    ...block1.settings,
+  });
 }
 
 registerBlocks();
