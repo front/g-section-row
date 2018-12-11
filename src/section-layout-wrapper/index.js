@@ -111,7 +111,10 @@ export const settings = {
       classes.push(`height-${height}`);
     }
 
-    const ALLOWED_BLOCKS = ['cloudblocks/section-layout-inner-one-column'];
+    const ALLOWED_BLOCKS = [
+      'cloudblocks/section-layout-inner-one-column',
+      'cloudblocks/section-layout-inner-two-columns',
+    ];
 
     const TEMPLATE = [
       [

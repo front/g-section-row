@@ -66,7 +66,11 @@ export const settings = {
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')}>
-          <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
+          <InnerBlocks
+            allowedBlocks={ALLOWED_BLOCKS}
+            template={TEMPLATE}
+            templateLock="all"
+          />
         </div>
 
         <InspectorControls>

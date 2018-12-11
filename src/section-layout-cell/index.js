@@ -93,7 +93,7 @@ export const settings = {
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={className} style={styles}>
-          <InnerBlocks />
+          <InnerBlocks templateLock={false} />
         </div>
 
         <InspectorControls>
