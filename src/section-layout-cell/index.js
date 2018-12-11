@@ -42,6 +42,10 @@ export const settings = {
   description: __('Cell for use inside any Section Inner Block'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
+  supports: {
+    inserter: false,
+    html: false,
+  },
 
   edit ({ attributes, className, setAttributes }) {
     const {

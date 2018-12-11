@@ -42,6 +42,10 @@ export const settings = {
   description: __('One column for use inside Section Layout Wrapper'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
+  supports: {
+    html: false,
+  },
+  parent: ['cloudblocks/section-layout-wrapper'],
 
   edit ({ attributes, className, setAttributes }) {
     const { width, fullHeight } = attributes;
@@ -54,11 +58,15 @@ export const settings = {
       classes.push('full-height');
     }
 
+    const ALLOWED_BLOCKS = ['cloudblocks/section-layout-cell'];
+
+    const TEMPLATE = [['cloudblocks/section-layout-cell']];
+
     return (
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')}>
-          <InnerBlocks />
+          <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
         </div>
 
         <InspectorControls>

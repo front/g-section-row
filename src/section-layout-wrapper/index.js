@@ -66,6 +66,9 @@ export const settings = {
   description: __('Flexible wrapper with background and spacing options'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
+  supports: {
+    html: false,
+  },
 
   edit ({ attributes, className, setAttributes }) {
     const {
@@ -108,11 +111,21 @@ export const settings = {
       classes.push(`height-${height}`);
     }
 
+    const ALLOWED_BLOCKS = ['cloudblocks/section-layout-inner-one-column'];
+
+    const TEMPLATE = [
+      [
+        'cloudblocks/section-layout-inner-one-column',
+        {},
+        [['cloudblocks/section-layout-cell']],
+      ],
+    ];
+
     return (
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')}>
-          <InnerBlocks />
+          <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
         </div>
 
         <BlockControls>
