@@ -5,6 +5,7 @@ const { __ } = i18n;
 
 // TODO: Import each block herer
 import * as block1 from './section-layout-wrapper';
+import * as block2 from './section-layout-inner-one-column';
 
 // Category name and slug
 const category = {
@@ -24,6 +25,10 @@ export function registerBlocks () {
   registerBlockType(`${category.slug}/${block1.name}`, {
     category: category.slug,
     ...block1.settings,
+  });
+  registerBlockType(`${category.slug}/${block2.name}`, {
+    category: category.slug,
+    ...block2.settings,
   });
 }
 

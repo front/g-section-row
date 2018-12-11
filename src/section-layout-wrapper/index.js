@@ -59,6 +59,8 @@ const BLOCK_ATTRIBUTES = {
   // },
 };
 
+export const name = 'section-layout-wrapper';
+
 export const settings = {
   title: __('Section Layout Wrapper'),
   description: __('Flexible wrapper with background and spacing options'),
