@@ -7,7 +7,7 @@ const { __ } = i18n;
 import * as block1 from './section-layout-wrapper';
 import * as block2 from './section-layout-inner-one-column';
 import * as block3 from './section-layout-inner-two-columns';
-// import * as block4 from './section-layout-inner-grid-columns';
+import * as block4 from './section-layout-inner-gallery';
 import * as block5 from './section-layout-cell';
 
 // Category name and slug
@@ -36,6 +36,10 @@ export function registerBlocks () {
   registerBlockType(`${category.slug}/${block3.name}`, {
     category: category.slug,
     ...block3.settings,
+  });
+  registerBlockType(`${category.slug}/${block4.name}`, {
+    category: category.slug,
+    ...block4.settings,
   });
   registerBlockType(`${category.slug}/${block5.name}`, {
     category: category.slug,
