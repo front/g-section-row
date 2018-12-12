@@ -12,18 +12,10 @@ import './style.scss';
 const { Fragment } = element;
 const { __ } = i18n;
 
-// TODO: Chooose components for the sidebar settings
-const {
-  PanelBody,
-  PanelRow,
-  SelectControl,
-  ToggleControl,
-  // IconButton,
-  // Toolbar,
-} = components;
-const { InspectorControls, InnerBlocks /* , BlockControls */ } = editor;
+const { PanelBody, PanelRow, SelectControl, ToggleControl } = components;
 
-// TODO: Add here the editable block attributes
+const { InspectorControls, InnerBlocks } = editor;
+
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
@@ -33,7 +25,23 @@ const BLOCK_ATTRIBUTES = {
     type: 'boolean',
     default: true,
   },
+  marginTop: {
+    type: 'string',
+  },
+  marginBottom: {
+    type: 'string',
+  },
+  paddingTop: {
+    type: 'string',
+  },
+  paddingBottom: {
+    type: 'string',
+  },
 };
+
+const ALLOWED_BLOCKS = ['cloudblocks/section-layout-cell'];
+
+const TEMPLATE = [['cloudblocks/section-layout-cell']];
 
 export const name = 'section-layout-inner-one-column';
 
@@ -48,7 +56,34 @@ export const settings = {
   parent: ['cloudblocks/section-layout-wrapper'],
 
   edit ({ attributes, className, setAttributes }) {
-    const { width, fullHeight } = attributes;
+    const {
+      width,
+      fullHeight,
+      marginTop,
+      marginBottom,
+      paddingTop,
+      paddingBottom,
+    } = attributes;
+
+    const spaceOptions = [
+      { label: __('None'), value: '' },
+      { label: __('XSmall'), value: 'xsmall' },
+      { label: __('Small'), value: 'small' },
+      { label: __('Medium'), value: 'medium' },
+      { label: __('Large'), value: 'large' },
+      { label: __('XLarge'), value: 'xlarge' },
+      { label: __('XXLarge'), value: 'xxlarge' },
+    ];
+
+    const widthOptions = [
+      { label: __('Default'), value: 'width-default' },
+      { label: __('Wide'), value: 'width-wide' },
+      { label: __('Full'), value: 'width-full' },
+      {
+        label: __('Full - No margin'),
+        value: 'width-full-no-margin',
+      },
+    ];
 
     const classes = [className];
     if (width) {
@@ -57,10 +92,18 @@ export const settings = {
     if (fullHeight) {
       classes.push('full-height');
     }
-
-    const ALLOWED_BLOCKS = ['cloudblocks/section-layout-cell'];
-
-    const TEMPLATE = [['cloudblocks/section-layout-cell']];
+    if (marginTop) {
+      classes.push(`margin-top-${marginTop}`);
+    }
+    if (marginBottom) {
+      classes.push(`margin-bottom-${marginBottom}`);
+    }
+    if (paddingTop) {
+      classes.push(`padding-top-${paddingTop}`);
+    }
+    if (paddingBottom) {
+      classes.push(`padding-bottom-${paddingBottom}`);
+    }
 
     return (
       <Fragment>
@@ -75,28 +118,56 @@ export const settings = {
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
-          <PanelBody title={__('Settings')} initialOpen={true}>
+          <PanelBody title={__('Vertical space')} initialOpen={false}>
             <PanelRow>
-              <label htmlFor="content-width">Content Width</label>
+              <label htmlFor="margin-top">{__('Margin Top')}</label>
               <SelectControl
-                id="content-width"
+                id="margin-top"
+                value={marginTop}
+                options={spaceOptions}
+                onChange={marginTop => setAttributes({ marginTop })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="margin-bottom">{__('Margin Bottom')}</label>
+              <SelectControl
+                id="margin-bottom"
+                value={marginBottom}
+                options={spaceOptions}
+                onChange={marginBottom => setAttributes({ marginBottom })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="padding-top">{__('Padding Top')}</label>
+              <SelectControl
+                id="padding-top"
+                value={paddingTop}
+                options={spaceOptions}
+                onChange={paddingTop => setAttributes({ paddingTop })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="padding-bottom">{__('Padding Bottom')}</label>
+              <SelectControl
+                id="padding-bottom"
+                value={paddingBottom}
+                options={spaceOptions}
+                onChange={paddingBottom => setAttributes({ paddingBottom })}
+              />
+            </PanelRow>
+          </PanelBody>
+          <PanelBody title={__('Width and Height')} initialOpen={false}>
+            <PanelRow>
+              <label htmlFor="row-width">{__('Inner row width')}</label>
+              <SelectControl
+                id="row-width"
                 value={width}
-                options={[
-                  { label: __('Default'), value: 'width-default' },
-                  { label: __('Wide'), value: 'width-wide' },
-                  { label: __('Full'), value: 'width-full' },
-                  {
-                    label: __('Full - No margin'),
-                    value: 'width-full-no-margin',
-                  },
-                ]}
+                options={widthOptions}
                 onChange={width => setAttributes({ width })}
               />
             </PanelRow>
             <PanelRow>
-              {/* <label htmlFor="full-height">Full height</label> */}
               <ToggleControl
-                // id="full-height"
                 label={__('Full Height')}
                 checked={fullHeight}
                 onChange={() => setAttributes({ fullHeight: !fullHeight })}
@@ -109,7 +180,14 @@ export const settings = {
   },
 
   save ({ attributes, className }) {
-    const { width, fullHeight } = attributes;
+    const {
+      width,
+      fullHeight,
+      marginTop,
+      marginBottom,
+      paddingTop,
+      paddingBottom,
+    } = attributes;
 
     const classes = [className];
     if (width) {
@@ -117,6 +195,18 @@ export const settings = {
     }
     if (fullHeight) {
       classes.push('full-height');
+    }
+    if (marginTop) {
+      classes.push(`margin-top-${marginTop}`);
+    }
+    if (marginBottom) {
+      classes.push(`margin-bottom-${marginBottom}`);
+    }
+    if (paddingTop) {
+      classes.push(`padding-top-${paddingTop}`);
+    }
+    if (paddingBottom) {
+      classes.push(`padding-bottom-${paddingBottom}`);
     }
 
     return (
