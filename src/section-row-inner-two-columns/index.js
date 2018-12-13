@@ -12,10 +12,18 @@ import './style.scss';
 const { Fragment } = element;
 const { __ } = i18n;
 
-const { PanelBody, PanelRow, SelectControl, ToggleControl } = components;
+// TODO: Chooose components for the sidebar settings
+const {
+  PanelBody,
+  PanelRow,
+  SelectControl,
+  ToggleControl,
+  // IconButton,
+  // Toolbar,
+} = components;
+const { InspectorControls, InnerBlocks /* , BlockControls */ } = editor;
 
-const { InspectorControls, InnerBlocks } = editor;
-
+// TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
@@ -24,6 +32,18 @@ const BLOCK_ATTRIBUTES = {
   fullHeight: {
     type: 'boolean',
     default: true,
+  },
+  split: {
+    type: 'string',
+    default: 'split-1-1',
+  },
+  columnGap: {
+    type: 'string',
+    default: 'column-gap-medium',
+  },
+  reverse: {
+    type: 'boolean',
+    default: false,
   },
   marginTop: {
     type: 'string',
@@ -39,26 +59,32 @@ const BLOCK_ATTRIBUTES = {
   },
 };
 
-const ALLOWED_BLOCKS = ['cloudblocks/section-layout-cell'];
+const ALLOWED_BLOCKS = ['cloudblocks/section-row-cell'];
 
-const TEMPLATE = [['cloudblocks/section-layout-cell']];
+const TEMPLATE = [
+  ['cloudblocks/section-row-cell'],
+  ['cloudblocks/section-row-cell'],
+];
 
-export const name = 'section-layout-inner-one-column';
+export const name = 'section-row-inner-two-columns';
 
 export const settings = {
-  title: __('Section Layout Inner One column'),
-  description: __('One column for use inside Section Layout Wrapper'),
+  title: __('Inner Two Columns Row'),
+  description: __('Two columns row for use inside Section Row block'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
   supports: {
     html: false,
   },
-  parent: ['cloudblocks/section-layout-wrapper'],
+  parent: ['cloudblocks/section-row'],
 
   edit ({ attributes, className, setAttributes }) {
     const {
       width,
       fullHeight,
+      split,
+      columnGap,
+      reverse,
       marginTop,
       marginBottom,
       paddingTop,
@@ -92,6 +118,15 @@ export const settings = {
     if (fullHeight) {
       classes.push('full-height');
     }
+    if (split) {
+      classes.push(split);
+    }
+    if (columnGap) {
+      classes.push(`column-gap-${columnGap}`);
+    }
+    if (reverse) {
+      classes.push('column-reverse');
+    }
     if (marginTop) {
       classes.push(`margin-top-${marginTop}`);
     }
@@ -112,12 +147,50 @@ export const settings = {
           <InnerBlocks
             allowedBlocks={ALLOWED_BLOCKS}
             template={TEMPLATE}
-            templateLock="all"
+            templateLock="insert"
           />
         </div>
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
+          <PanelBody>
+            <PanelRow>
+              <label htmlFor="split">{__('Column Split')}</label>
+              <SelectControl
+                id="split"
+                value={split}
+                options={[
+                  { label: __('One to One'), value: 'split-1-1' },
+                  { label: __('One to Two'), value: 'split-1-2' },
+                  { label: __('Two to One'), value: 'split-2-1' },
+                  { label: __('One to Three'), value: 'split-1-3' },
+                  { label: __('Three to One'), value: 'split-3-1' },
+                  { label: __('One to Four'), value: 'split-1-4' },
+                  { label: __('Four to One'), value: 'split-4-1' },
+                ]}
+                onChange={split => setAttributes({ split })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="column-gap">{__('Column Gap')}</label>
+              <SelectControl
+                id="column-gap"
+                value={columnGap}
+                options={spaceOptions}
+                onChange={columnGap => setAttributes({ columnGap })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                label={__('Column Reverse')}
+                help={__(
+                  'Columns will reverse on larger screens, but keep it\'s original order on smaller screens.'
+                )}
+                checked={reverse}
+                onChange={() => setAttributes({ reverse: !reverse })}
+              />
+            </PanelRow>
+          </PanelBody>
           <PanelBody title={__('Vertical space')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="margin-top">{__('Margin Top')}</label>
@@ -183,6 +256,9 @@ export const settings = {
     const {
       width,
       fullHeight,
+      split,
+      columnGap,
+      reverse,
       marginTop,
       marginBottom,
       paddingTop,
@@ -195,6 +271,15 @@ export const settings = {
     }
     if (fullHeight) {
       classes.push('full-height');
+    }
+    if (split) {
+      classes.push(split);
+    }
+    if (columnGap) {
+      classes.push(`column-gap-${columnGap}`);
+    }
+    if (reverse) {
+      classes.push('column-reverse');
     }
     if (marginTop) {
       classes.push(`margin-top-${marginTop}`);

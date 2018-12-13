@@ -35,11 +35,11 @@ const BLOCK_ATTRIBUTES = {
   },
 };
 
-export const name = 'section-layout-cell';
+export const name = 'section-row-cell';
 
 export const settings = {
-  title: __('Section Layout Cell'),
-  description: __('Cell for use inside any Section Inner Block'),
+  title: __('Cell'),
+  description: __('Cell for use inside any Section Row Inner blocks'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
   supports: {

@@ -60,28 +60,28 @@ const BLOCK_ATTRIBUTES = {
   },
 };
 
-const ALLOWED_BLOCKS = ['cloudblocks/section-layout-cell'];
+const ALLOWED_BLOCKS = ['cloudblocks/section-row-cell'];
 
 function getTemplate (galleryItem) {
   const galleryItemBlocks = [];
   for (let i = 0; i < galleryItem; i++) {
-    galleryItemBlocks.push(['cloudblocks/section-layout-cell']);
+    galleryItemBlocks.push(['cloudblocks/section-row-cell']);
   }
   return galleryItemBlocks;
 }
 
-export const name = 'section-layout-inner-gallery';
+export const name = 'section-row-inner-gallery';
 
 export const settings = {
-  title: __('Section Layout Inner Gallery'),
-  description: __('Columns and rows for use inside Section Layout Block'),
+  title: __('Inner Gallery Row'),
+  description: __('Grid row for use inside Section Row block'),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
   supports: {
     html: false,
   },
 
-  parent: ['cloudblocks/section-layout-wrapper'],
+  parent: ['cloudblocks/section-row'],
 
   edit ({ attributes, className, setAttributes }) {
     const {

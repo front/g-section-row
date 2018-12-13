@@ -67,22 +67,24 @@ const BLOCK_ATTRIBUTES = {
 };
 
 const ALLOWED_BLOCKS = [
-  'cloudblocks/section-layout-inner-one-column',
-  'cloudblocks/section-layout-inner-two-columns',
+  'cloudblocks/section-row-inner-one-column',
+  'cloudblocks/section-row-inner-two-columns',
 ];
 
 const TEMPLATE = [
   [
-    'cloudblocks/section-layout-inner-one-column',
+    'cloudblocks/section-row-inner-one-column',
     {},
-    [['cloudblocks/section-layout-cell']],
+    [['cloudblocks/section-row-cell']],
   ],
 ];
-export const name = 'section-layout-wrapper';
+export const name = 'section-row';
 
 export const settings = {
-  title: __('Section Layout Wrapper'),
-  description: __('Flexible wrapper with background and spacing options'),
+  title: __('Section Row'),
+  description: __(
+    'Section row used as wrapper for inner-one-column, inner-two-column and inner-gallery blocks'
+  ),
   icon: 'cover-image',
   attributes: BLOCK_ATTRIBUTES,
   supports: {

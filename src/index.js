@@ -4,11 +4,11 @@ const { dispatch, select } = data;
 const { __ } = i18n;
 
 // TODO: Import each block herer
-import * as block1 from './section-layout-wrapper';
-import * as block2 from './section-layout-inner-one-column';
-import * as block3 from './section-layout-inner-two-columns';
-import * as block4 from './section-layout-inner-gallery';
-import * as block5 from './section-layout-cell';
+import * as block1 from './section-row';
+import * as block2 from './section-row-inner-one-column';
+import * as block3 from './section-row-inner-two-columns';
+import * as block4 from './section-row-inner-gallery';
+import * as block5 from './section-row-cell';
 
 // Category name and slug
 const category = {
