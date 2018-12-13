@@ -31,11 +31,10 @@ const BLOCK_ATTRIBUTES = {
     type: 'string',
   },
   // backgroundUrl: {
-  //   type: 'string',
+  //   type: 'string', // Or object?
   // },
   backgroundImagePosition: {
     type: 'string',
-    // default: 'center center',
   },
   backgroundImageSize: {
     type: 'string',
@@ -60,6 +59,14 @@ const BLOCK_ATTRIBUTES = {
   height: {
     type: 'string',
   },
+  // htmlElement: {
+  //   type: 'string',
+  //   default: 'div',
+  // },
+  // behindPageHeader: {
+  //   type: 'bool',
+  //   default: false,
+  // },
   // scrollBtn: {
   //   type: 'bool',
   //   default: false,
