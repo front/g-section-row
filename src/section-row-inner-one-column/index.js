@@ -85,7 +85,7 @@ export const settings = {
       },
     ];
 
-    const classes = [className];
+    const classes = ['edit', className];
     if (width) {
       classes.push(width);
     }
@@ -189,7 +189,7 @@ export const settings = {
       paddingBottom,
     } = attributes;
 
-    const classes = [className];
+    const classes = ['save', className];
     if (width) {
       classes.push(width);
     }

@@ -1,3 +1,22 @@
 // The class name needs to match the names of the category and block
-.wp-block-cloudblocks-section-row-inner-one-column {
+.wp-block-cloudblocks-section-row-inner-one-column.save {
+  display: flex; // IE11
+  display: grid;
+
+  &.full-height {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    //  min-height: 100%;
+  }
+}
+
+.wp-block-cloudblocks-section-row-inner-one-column.edit {
+  > div > .editor-block-list__layout {
+    display: flex; // IE11
+    display: grid;
+  }
+
+  &.full-height > div > .editor-block-list__layout {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    //  min-height: 100%;
+  }
 }
