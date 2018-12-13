@@ -1,0 +1,21 @@
+// Variables$space: 30px;
+$space: 30px;
+$space-one-fourth: $space * 0.25;
+$space-half: $space * 0.5;
+$space-double: $space * 2;
+$space-triple: $space * 3;
+$space-quadruple: $space * 4;
+
+$content-width: 800px + ($space * 2);
+$content-width-wide: 1200px;
+$content-width-full: 100vw;
+
+$break-small: 400px;
+
+.container {
+  max-width: $content-width;
+  padding-left: $space;
+  padding-right: $space;
+  margin-left: auto;
+  margin-right: auto;
+}

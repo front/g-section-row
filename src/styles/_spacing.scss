@@ -1,0 +1,117 @@
+@import "./variables";
+
+.margin {
+  &-top {
+    &-xsmall {
+      margin-top: $space-one-fourth;
+    }
+    &-small {
+      margin-top: $space-half;
+    }
+    &-medium {
+      margin-top: $space;
+    }
+    &-large {
+      margin-top: $space-double;
+    }
+    &-xlarge {
+      margin-top: $space-triple;
+    }
+    &-xxlarge {
+      margin-top: $space-quadruple;
+    }
+  }
+  &-bottom {
+    &-xsmall {
+      margin-bottom: $space-one-fourth;
+    }
+    &-small {
+      margin-bottom: $space-half;
+    }
+    &-medium {
+      margin-bottom: $space;
+    }
+    &-large {
+      margin-bottom: $space-double;
+    }
+    &-xlarge {
+      margin-bottom: $space-triple;
+    }
+    &-xxlarge {
+      margin-bottom: $space-quadruple;
+    }
+  }
+}
+
+.padding {
+  &-top {
+    &-xsmall {
+      padding-top: $space-one-fourth;
+    }
+    &-small {
+      padding-top: $space-half;
+    }
+    &-medium {
+      padding-top: $space;
+    }
+    &-large {
+      padding-top: $space-double;
+    }
+    &-xlarge {
+      padding-top: $space-triple;
+    }
+    &-xxlarge {
+      padding-top: $space-quadruple;
+    }
+  }
+  &-bottom {
+    &-xsmall {
+      padding-bottom: $space-one-fourth;
+    }
+    &-small {
+      padding-bottom: $space-half;
+    }
+    &-medium {
+      padding-bottom: $space;
+    }
+    &-large {
+      padding-bottom: $space-double;
+    }
+    &-xlarge {
+      padding-bottom: $space-triple;
+    }
+    &-xxlarge {
+      padding-bottom: $space-quadruple;
+    }
+  }
+}
+
+%column-gap {
+  @media (min-width: $break-small) {
+    &.column-gap-none {
+      column-gap: 0;
+    }
+
+    &.column-gap-xsmall {
+      column-gap: $space-one-fourth;
+    }
+
+    &.column-gap-small {
+      column-gap: $space-half;
+    }
+
+    &.column-gap-medium {
+      column-gap: $space;
+    }
+
+    &.column-gap-large {
+      column-gap: $space-double;
+    }
+    &.column-gap-xlarge {
+      column-gap: $space-triple;
+    }
+    &.column-gap-xxlarge {
+      column-gap: $space-quadruple;
+    }
+  }
+}

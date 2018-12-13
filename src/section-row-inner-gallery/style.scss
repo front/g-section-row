@@ -1,3 +1,121 @@
+@import "../styles/variables";
+@import "../styles/spacing";
+
 // The class name needs to match the names of the category and block
-.wp-block-cloudblocks-section-row-inner-gallery {
+.wp-block-cloudblocks-section-row-inner-gallery.save {
+  display: flex; // IE11
+  flex-wrap: wrap; // IE11
+  display: grid;
+
+  @media (min-width: $break-small) {
+    &.columns-1 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &.columns-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &.columns-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &.columns-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &.columns-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    &.columns-6 {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    &.columns-7 {
+      grid-template-columns: repeat(7, 1fr);
+    }
+    &.columns-8 {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    &.columns-9 {
+      grid-template-columns: repeat(9, 1fr);
+    }
+    &.columns-10 {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+
+  @extend %column-gap;
+
+  @media (min-width: $break-small) {
+    &.row-gap-none {
+      row-gap: 0;
+    }
+    &.row-gap-xsmall {
+      row-gap: $space-one-fourth;
+    }
+    &.row-gap-small {
+      row-gap: $space-half;
+    }
+    &.row-gap-medium {
+      row-gap: $space;
+    }
+    &.row-gap-large {
+      row-gap: $space-double;
+    }
+    &.row-gap-xlarge {
+      row-gap: $space-triple;
+    }
+    &.row-gap-xxlarge {
+      row-gap: $space-quadruple;
+    }
+  }
+}
+
+.wp-block-cloudblocks-section-row-inner-gallery.edit {
+  > div > .editor-block-list__layout {
+    display: flex; // IE11
+    flex-wrap: wrap; // IE11
+    display: grid;
+  }
+
+  @media (min-width: $break-small) {
+    &.columns-1 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &.columns-2 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &.columns-3 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &.columns-4 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &.columns-5 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    &.columns-6 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    &.columns-7 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(7, 1fr);
+    }
+    &.columns-8 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    &.columns-9 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(9, 1fr);
+    }
+    &.columns-10 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+
+  // Editor overrides
+  div > div > div > {
+    .editor-block-list__layout
+      .editor-block-list__block:first-child
+      > .editor-block-list__block-edit,
+    .editor-block-list__layout
+      .editor-default-block-appender
+      > .editor-default-block-appender__content {
+      margin-top: 32px;
+    }
+  }
 }
