@@ -7,6 +7,7 @@ import { element, i18n, components, editor } from 'wp';
 /**
  * Internal dependencies
  */
+import '../styles/_variables.scss';
 import './style.scss';
 
 const { Fragment } = element;
@@ -39,7 +40,7 @@ const BLOCK_ATTRIBUTES = {
   },
   columnGap: {
     type: 'string',
-    default: 'column-gap-medium',
+    default: 'medium',
   },
   reverse: {
     type: 'boolean',
@@ -111,7 +112,7 @@ export const settings = {
       },
     ];
 
-    const classes = [className];
+    const classes = ['edit', className];
     if (width) {
       classes.push(width);
     }
@@ -265,7 +266,7 @@ export const settings = {
       paddingBottom,
     } = attributes;
 
-    const classes = [className];
+    const classes = ['save', className];
     if (width) {
       classes.push(width);
     }

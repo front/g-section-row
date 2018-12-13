@@ -92,7 +92,10 @@ export const settings = {
     return (
       <Fragment>
         {/* Block markup (main editor) */}
-        <div className={className} style={styles}>
+        <div
+          className={['section-row-cell', className].join(' ')}
+          style={styles}
+        >
           <InnerBlocks templateLock={false} />
         </div>
 
@@ -184,7 +187,7 @@ export const settings = {
     }
 
     return (
-      <div className={className} style={styles}>
+      <div className={['section-row-cell', className].join(' ')} style={styles}>
         <InnerBlocks.Content />
       </div>
     );

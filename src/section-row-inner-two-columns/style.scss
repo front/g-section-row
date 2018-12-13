@@ -1,3 +1,105 @@
+@import "../styles/variables";
+@import "../styles/spacing";
+
 // The class name needs to match the names of the category and block
-.wp-block-cloudblocks-section-row-inner-two-columns {
+.wp-block-cloudblocks-section-row-inner-two-columns.save {
+  display: flex; // IE11
+  display: grid;
+
+  &.column-reverse {
+    @media (min-width: $break-small) {
+      .section-row-cell:first-child {
+        order: 2;
+      }
+    }
+  }
+
+  @extend %column-gap;
+
+  @media (min-width: $break-small) {
+    &.split-1-1 {
+      grid-template-columns: 1fr 1fr;
+    }
+    &.split-1-2 {
+      grid-template-columns: 1fr 2fr;
+    }
+    &.split-2-1 {
+      grid-template-columns: 2fr 1fr;
+    }
+    &.split-1-3 {
+      grid-template-columns: 1fr 3fr;
+    }
+    &.split-3-1 {
+      grid-template-columns: 3fr 1fr;
+    }
+    &.split-1-4 {
+      grid-template-columns: 1fr 4fr;
+    }
+    &.split-4-1 {
+      grid-template-columns: 4fr 1fr;
+    }
+  }
+
+  &.full-height {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    min-height: 100%;
+  }
+}
+
+.wp-block-cloudblocks-section-row-inner-two-columns.edit {
+  > div > .editor-block-list__layout {
+    display: flex; // IE11
+    display: grid;
+  }
+
+  &.column-reverse > div > .editor-block-list__layout {
+    @media (min-width: $break-small) {
+      .section-row-cell:first-child {
+        order: 2;
+      }
+    }
+  }
+
+  @extend %column-gap;
+
+  @media (min-width: $break-small) {
+    &.split-1-1 > div > .editor-block-list__layout {
+      grid-template-columns: 1fr 1fr;
+    }
+    &.split-1-2 > div > .editor-block-list__layout {
+      grid-template-columns: 1fr 2fr;
+    }
+    &.split-2-1 > div > .editor-block-list__layout {
+      grid-template-columns: 2fr 1fr;
+    }
+    &.split-1-3 > div > .editor-block-list__layout {
+      grid-template-columns: 1fr 3fr;
+    }
+    &.split-3-1 > div > .editor-block-list__layout {
+      grid-template-columns: 3fr 1fr;
+    }
+    &.split-1-4 > div > .editor-block-list__layout {
+      grid-template-columns: 1fr 4fr;
+    }
+    &.split-4-1 > div > .editor-block-list__layout {
+      grid-template-columns: 4fr 1fr;
+    }
+  }
+
+  &.full-height > div > .editor-block-list__layout {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    min-height: 100%;
+  }
+
+  // Editor overrides
+  div > div > div > {
+    .editor-block-list__layout
+      .editor-block-list__block:first-child
+      > .editor-block-list__block-edit,
+    .editor-block-list__layout
+      .editor-default-block-appender
+      > .editor-default-block-appender__content {
+      margin-top: 32px;
+    }
+  }
 }
