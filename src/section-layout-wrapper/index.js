@@ -13,18 +13,26 @@ const { Fragment } = element;
 const { __ } = i18n;
 
 // TODO: Chooose components for the sidebar settings
-const { PanelBody, PanelRow, SelectControl, IconButton, Toolbar } = components;
-const { InspectorControls, InnerBlocks, BlockControls } = editor;
+const {
+  PanelBody,
+  PanelRow,
+  SelectControl /* IconButton, Toolbar*/,
+} = components;
+
+const {
+  InspectorControls,
+  InnerBlocks,
+  PanelColorSettings /* BlockControls*/,
+} = editor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
-    default: 'width-full',
   },
-  backgroundImageUrl: {
-    type: 'string',
-  },
+  // backgroundUrl: {
+  //   type: 'string',
+  // },
   backgroundImagePosition: {
     type: 'string',
     // default: 'center center',
@@ -33,7 +41,7 @@ const BLOCK_ATTRIBUTES = {
     type: 'string',
     default: 'cover',
   },
-  overlayColor: {
+  backgroundColor: {
     type: 'string',
   },
   // overlayOpacity: 1,
@@ -51,7 +59,6 @@ const BLOCK_ATTRIBUTES = {
   },
   height: {
     type: 'string',
-    default: 'auto',
   },
   // scrollBtn: {
   //   type: 'bool',
@@ -59,6 +66,18 @@ const BLOCK_ATTRIBUTES = {
   // },
 };
 
+const ALLOWED_BLOCKS = [
+  'cloudblocks/section-layout-inner-one-column',
+  'cloudblocks/section-layout-inner-two-columns',
+];
+
+const TEMPLATE = [
+  [
+    'cloudblocks/section-layout-inner-one-column',
+    {},
+    [['cloudblocks/section-layout-cell']],
+  ],
+];
 export const name = 'section-layout-wrapper';
 
 export const settings = {
@@ -72,11 +91,11 @@ export const settings = {
 
   edit ({ attributes, className, setAttributes }) {
     const {
-      // width,
-      // backgroundImageUrl,
-      // backgroundImagePosition,
-      // backgroundImageSize,
-      // overlayColor,
+      width,
+      // backgroundUrl,
+      backgroundPosition,
+      backgroundSize,
+      backgroundColor,
       paddingTop,
       paddingBottom,
       marginTop,
@@ -84,7 +103,7 @@ export const settings = {
       height,
     } = attributes;
 
-    const verticalSpaceOptions = [
+    const spaceOptions = [
       { label: __('None'), value: '' },
       { label: __('XSmall'), value: 'xsmall' },
       { label: __('Small'), value: 'small' },
@@ -94,12 +113,41 @@ export const settings = {
       { label: __('XXLarge'), value: 'xxlarge' },
     ];
 
+    const heightOptions = [
+      { label: 'Auto', value: '' },
+      { label: 'One Third', value: 'one-third' },
+      { label: 'Half', value: 'half' },
+      { label: 'Two third', value: 'two-third' },
+      { label: 'Full', value: 'full' },
+    ];
+
+    const widthOptions = [
+      { label: 'Default', value: '' },
+      { label: 'Wide', value: 'width-wide' },
+      { label: 'Full Width', value: 'width-full' },
+    ];
+
+    const bgPositionOptions = [
+      { label: 'None', value: '' },
+      { label: 'Center', value: 'center' },
+      { label: 'Center Top', value: 'center top' },
+      { label: 'Center Bottom', value: 'center bottom' },
+      { label: 'Left Center', value: 'left center' },
+      { label: 'Right Center', value: 'right center' },
+    ];
+
+    const bgSizeOptions = [
+      { label: __('None'), value: '' },
+      { label: __('Cover'), value: 'cover' },
+      { label: __('Contain'), value: 'contain' },
+    ];
+
     const classes = [className];
-    if (paddingTop) {
-      classes.push(`padding-top-${paddingTop}`);
+    if (width) {
+      classes.push(width);
     }
-    if (paddingBottom) {
-      classes.push(`padding-bottom-${paddingBottom}`);
+    if (height) {
+      classes.push(`height-${height}`);
     }
     if (marginTop) {
       classes.push(`margin-top-${marginTop}`);
@@ -107,103 +155,122 @@ export const settings = {
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
     }
-    if (height) {
-      classes.push(`height-${height}`);
+    if (paddingTop) {
+      classes.push(`padding-top-${paddingTop}`);
+    }
+    if (paddingBottom) {
+      classes.push(`padding-bottom-${paddingBottom}`);
     }
 
-    const ALLOWED_BLOCKS = [
-      'cloudblocks/section-layout-inner-one-column',
-      'cloudblocks/section-layout-inner-two-columns',
-    ];
-
-    const TEMPLATE = [
-      [
-        'cloudblocks/section-layout-inner-one-column',
-        {},
-        [['cloudblocks/section-layout-cell']],
-      ],
-    ];
+    const styles = {};
+    if (backgroundColor) {
+      styles.backgroundColor = backgroundColor;
+    }
+    if (backgroundPosition) {
+      styles.backgroundPosition = backgroundPosition;
+    }
+    if (backgroundSize) {
+      styles.backgroundSize = backgroundSize;
+    }
 
     return (
       <Fragment>
         {/* Block markup (main editor) */}
-        <div className={classes.join(' ')}>
+        <div className={classes.join(' ')} style={styles}>
           <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
         </div>
 
-        <BlockControls>
-          <Toolbar>
-            <IconButton
-              label={__('Wide width')}
-              icon="align-wide"
-              className={`components-toolbar__control`}
-              onClick={() => setAttributes({ width: 'width-wide' })}
-            />
-          </Toolbar>
-        </BlockControls>
-
         <InspectorControls>
           {/* Block settings (sidebar) */}
-          <PanelBody title={__('Vertical Height')} initialOpen={false}>
+          <PanelBody>
             <PanelRow>
-              <label htmlFor="padding-top">Padding Top</label>
+              <label htmlFor="width">{__('Width')}</label>
               <SelectControl
-                id="padding-top"
-                value={paddingTop}
-                options={verticalSpaceOptions}
-                onChange={paddingTop => {
-                  setAttributes({ paddingTop });
-                }}
+                id="width"
+                value={width}
+                options={widthOptions}
+                onChange={width => setAttributes({ width })}
               />
             </PanelRow>
             <PanelRow>
-              <label htmlFor="padding-bottom">Padding Bottom</label>
-              <SelectControl
-                id="padding-bottom"
-                value={paddingBottom}
-                options={verticalSpaceOptions}
-                onChange={paddingBottom => {
-                  setAttributes({ paddingBottom });
-                }}
-              />
-            </PanelRow>
-            <PanelRow>
-              <label htmlFor="margin-top">Margin Top</label>
-              <SelectControl
-                id="margin-top"
-                value={marginTop}
-                options={verticalSpaceOptions}
-                onChange={marginTop => {
-                  setAttributes({ marginTop });
-                }}
-              />
-            </PanelRow>
-            <PanelRow>
-              <label htmlFor="margin-bottom">Margin Bottom</label>
-              <SelectControl
-                id="margin-bottom"
-                value={marginBottom}
-                options={verticalSpaceOptions}
-                onChange={marginBottom => {
-                  setAttributes({ marginBottom });
-                }}
-              />
-            </PanelRow>
-            <PanelRow>
-              <label htmlFor="height">Height</label>
+              <label htmlFor="height">{__('Height')}</label>
               <SelectControl
                 id="height"
                 value={height}
-                options={[
-                  { label: 'Auto', value: '' },
-                  { label: 'One Third', value: 'one-third' },
-                  { label: 'Half', value: 'half' },
-                  { label: 'Two third', value: 'two-third' },
-                  { label: 'Full', value: 'full' },
-                ]}
-                onChange={height => {
-                  setAttributes({ height });
-                }}
+                options={heightOptions}
+                onChange={height => setAttributes({ height })}
+              />
+            </PanelRow>
+          </PanelBody>
+          <PanelColorSettings
+            title={__('Background Color')}
+            colorSettings={[
+              {
+                value: backgroundColor,
+                onChange: backgroundColor => {
+                  setAttributes({ backgroundColor });
+                },
+                label: __('Background Color'),
+              },
+            ]}
+          />
+          <PanelBody title={__('Background Settings')} initialOpen={false}>
+            <PanelRow>
+              <label htmlFor="bg-position">{__('Background Position')}</label>
+              <SelectControl
+                id="bg-position"
+                value={backgroundPosition}
+                options={bgPositionOptions}
+                onChange={backgroundPosition =>
+                  setAttributes({ backgroundPosition })
+                }
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="bg-size">{__('Background Size')}</label>
+              <SelectControl
+                id="bg-size"
+                value={backgroundSize}
+                options={bgSizeOptions}
+                onChange={backgroundSize => setAttributes({ backgroundSize })}
+              />
+            </PanelRow>
+          </PanelBody>
+          <PanelBody title={__('Vertical space')} initialOpen={false}>
+            <PanelRow>
+              <label htmlFor="margin-top">{__('Margin Top')}</label>
+              <SelectControl
+                id="margin-top"
+                value={marginTop}
+                options={spaceOptions}
+                onChange={marginTop => setAttributes({ marginTop })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="margin-bottom">{__('Margin Bottom')}</label>
+              <SelectControl
+                id="margin-bottom"
+                value={marginBottom}
+                options={spaceOptions}
+                onChange={marginBottom => setAttributes({ marginBottom })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="padding-top">{__('Padding Top')}</label>
+              <SelectControl
+                id="padding-top"
+                value={paddingTop}
+                options={spaceOptions}
+                onChange={paddingTop => setAttributes({ paddingTop })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <label htmlFor="padding-bottom">{__('Padding Bottom')}</label>
+              <SelectControl
+                id="padding-bottom"
+                value={paddingBottom}
+                options={spaceOptions}
+                onChange={paddingBottom => setAttributes({ paddingBottom })}
               />
             </PanelRow>
           </PanelBody>
@@ -214,11 +281,11 @@ export const settings = {
 
   save ({ attributes, className }) {
     const {
-      // width,
+      width,
       // backgroundImageUrl,
-      // backgroundImagePosition,
-      // backgroundImageSize,
-      // overlayColor,
+      backgroundPosition,
+      backgroundSize,
+      backgroundColor,
       paddingTop,
       paddingBottom,
       marginTop,
@@ -227,24 +294,38 @@ export const settings = {
     } = attributes;
 
     const classes = [className];
+    if (width) {
+      classes.push(width);
+    }
+    if (height) {
+      classes.push(`height-${height}`);
+    }
+    if (marginTop) {
+      classes.push(`margin-top-${marginTop}`);
+    }
+    if (marginBottom) {
+      classes.push(`margin-bottom-${marginBottom}`);
+    }
     if (paddingTop) {
       classes.push(`padding-top-${paddingTop}`);
     }
     if (paddingBottom) {
       classes.push(`padding-bottom-${paddingBottom}`);
     }
-    if (marginTop) {
-      classes.push(`margin-top-${marginTop}`);
+
+    const styles = {};
+    if (backgroundColor) {
+      styles.backgroundColor = backgroundColor;
     }
-    if (marginBottom) {
-      classes.push(`margin-top-${marginBottom}`);
+    if (backgroundPosition) {
+      styles.backgroundPosition = backgroundPosition;
     }
-    if (height) {
-      classes.push(`height-${height}`);
+    if (backgroundSize) {
+      styles.backgroundSize = backgroundSize;
     }
 
     return (
-      <div className={classes.join(' ')}>
+      <div className={classes.join(' ')} style={styles}>
         <InnerBlocks.Content />
       </div>
     );
