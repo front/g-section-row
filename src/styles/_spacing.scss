@@ -115,3 +115,30 @@
     }
   }
 }
+
+[class*="-section-row-inner-"] {
+  margin-left: auto;
+  margin-right: auto;
+
+  &.width-narrow {
+    max-width: $content-width;
+  }
+
+  &.width-wide {
+    max-width: $content-width-wide;
+  }
+
+  &.width-auto-margin {
+    // max-width: $content-width-full;
+    max-width: none;
+    margin-left: $space;
+    margin-right: $space;
+
+    // .alignfull & { }
+  }
+
+  &.width-auto {
+    // max-width: $content-width-full;
+    max-width: none;
+  }
+}

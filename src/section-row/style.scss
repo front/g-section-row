@@ -1,3 +1,53 @@
+@import "../styles/variables";
+@import "../styles/spacing";
+
 // The class name needs to match the names of the category and block
 .wp-block-cloudblocks-section-row {
+  // max-width: $content-width;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  // Width
+  &.width-wide {
+    $negative-margin: ($content-width-wide - $content-width) * 0.5;
+    // max-width: $content-width-wide;
+    margin-left: -$negative-margin;
+    margin-right: -$negative-margin;
+    max-width: unset;
+    width: unset;
+  }
+
+  &.width-full {
+    width: $content-width-full;
+    max-width: $content-width-full;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  // Height
+  &.height-auto {
+    height: auto;
+  }
+
+  &.height-one-third {
+    height: 33.33vh;
+  }
+
+  &.height-half {
+    height: 50vh;
+  }
+
+  &.height-two-third {
+    height: 66.66vh;
+  }
+
+  &.height-full {
+    height: 100vh;
+  }
 }

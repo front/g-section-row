@@ -131,9 +131,9 @@ export const settings = {
     ];
 
     const widthOptions = [
-      { label: 'Default', value: '' },
-      { label: 'Wide', value: 'width-wide' },
-      { label: 'Full Width', value: 'width-full' },
+      { label: 'Auto', value: '' },
+      { label: 'Wide', value: 'wide' },
+      { label: 'Full Width', value: 'full' },
     ];
 
     const bgPositionOptions = [
@@ -153,7 +153,7 @@ export const settings = {
 
     const classes = [className];
     if (width) {
-      classes.push(width);
+      classes.push(`width-${width}`);
     }
     if (height) {
       classes.push(`height-${height}`);
