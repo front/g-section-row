@@ -1,3 +1,7 @@
 // The class name needs to match the names of the category and block
 .wp-block-cloudblocks-section-row-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 100%; // IE11
 }
