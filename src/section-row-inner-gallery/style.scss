@@ -65,6 +65,11 @@
       row-gap: $space-quadruple;
     }
   }
+
+  &.height-full {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    min-height: 100%;
+  }
 }
 
 .wp-block-cloudblocks-section-row-inner-gallery.edit {
@@ -105,6 +110,11 @@
     &.columns-10 > div > .editor-block-list__layout {
       grid-template-columns: repeat(10, 1fr);
     }
+  }
+
+  &.height-full {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    min-height: 100%;
   }
 
   // Editor overrides

@@ -3,7 +3,7 @@
   display: flex; // IE11
   display: grid;
 
-  &.full-height {
+  &.height-full {
     height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
     //  min-height: 100%;
   }
@@ -15,7 +15,7 @@
     display: grid;
   }
 
-  &.full-height > div > .editor-block-list__layout {
+  &.height-full > div > .editor-block-list__layout {
     height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
     //  min-height: 100%;
   }
