@@ -19,7 +19,6 @@ const { InspectorControls, InnerBlocks } = editor;
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
-    default: 'auto',
   },
   fullHeight: {
     type: 'boolean',
@@ -76,15 +75,14 @@ export const settings = {
     ];
 
     const widthOptions = [
-      { label: __('Auto'), value: 'auto' },
-      { label: __('Auto with margins'), value: 'auto-margin' },
-      { label: __('Narrow'), value: 'narrow' },
-      { label: __('Wide'), value: 'wide' },
+      { label: __('Default'), value: '' },
+      { label: __('Wide'), value: 'alignwide' },
+      { label: __('Full width'), value: 'alignfull' },
     ];
 
     const classes = ['edit', className];
     if (width) {
-      classes.push(`width-${width}`);
+      classes.push(width);
     }
     if (fullHeight) {
       classes.push('height-full');
@@ -188,7 +186,7 @@ export const settings = {
 
     const classes = ['save', className];
     if (width) {
-      classes.push(`width-${width}`);
+      classes.push(width);
     }
     if (fullHeight) {
       classes.push('height-full');

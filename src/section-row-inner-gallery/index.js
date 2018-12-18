@@ -24,7 +24,6 @@ const { InspectorControls, InnerBlocks } = editor;
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
-    default: 'auto',
   },
   columns: {
     type: 'number',
@@ -108,15 +107,14 @@ export const settings = {
     ];
 
     const widthOptions = [
-      { label: __('Auto'), value: 'auto' },
-      { label: __('Auto with margins'), value: 'auto-margin' },
-      { label: __('Narrow'), value: 'narrow' },
-      { label: __('Wide'), value: 'wide' },
+      { label: __('Default'), value: '' },
+      { label: __('Wide'), value: 'alignwide' },
+      { label: __('Full width'), value: 'alignfull' },
     ];
 
     const classes = ['edit', className];
     if (width) {
-      classes.push(`width-${width}`);
+      classes.push(width);
     }
     if (columns) {
       classes.push(`columns-${columns}`);
@@ -266,7 +264,7 @@ export const settings = {
 
     const classes = ['save', className];
     if (width) {
-      classes.push(`width-${width}`);
+      classes.push(width);
     }
     if (columns) {
       classes.push(`columns-${columns}`);

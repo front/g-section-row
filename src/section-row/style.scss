@@ -10,25 +10,25 @@
   margin-bottom: 0;
 
   // Width
-  &.width-wide {
-    $negative-margin: ($content-width-wide - $content-width) * 0.5;
-    // max-width: $content-width-wide;
-    margin-left: -$negative-margin;
-    margin-right: -$negative-margin;
-    max-width: unset;
-    width: unset;
-  }
+  // &.width-wide {
+  //   $negative-margin: ($content-width-wide - $content-width) * 0.5;
+  //   // max-width: $content-width-wide;
+  //   margin-left: -$negative-margin;
+  //   margin-right: -$negative-margin;
+  //   max-width: unset;
+  //   width: unset;
+  // }
 
-  &.width-full {
-    width: $content-width-full;
-    max-width: $content-width-full;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding-left: 0;
-    padding-right: 0;
-    position: relative;
-    overflow: hidden;
-  }
+  // &.width-full {
+  //   width: $content-width-full;
+  //   max-width: $content-width-full;
+  //   margin-left: calc(-50vw + 50%);
+  //   margin-right: calc(-50vw + 50%);
+  //   padding-left: 0;
+  //   padding-right: 0;
+  //   position: relative;
+  //   overflow: hidden;
+  // }
 
   // Height
   &.height-auto {
