@@ -102,9 +102,10 @@ export const settings = {
     ];
 
     const widthOptions = [
-      { label: __('Default'), value: '' },
-      { label: __('Wide'), value: 'alignwide' },
-      { label: __('Full width'), value: 'alignfull' },
+      { label: __('Auto'), value: '' },
+      { label: __('Auto with margins'), value: 'width-margins' },
+      { label: __('Wide'), value: 'width-wide' },
+      { label: __('Narrow'), value: 'width-narrow' },
     ];
 
     const classes = ['edit', className];

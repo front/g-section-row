@@ -127,13 +127,18 @@
 [class*="-section-row-inner-"] {
   margin-left: auto;
   margin-right: auto;
-  max-width: $content-width;
+  max-width: none;
 
-  &.alignwide {
+  &.width-margins {
+    margin-left: $space;
+    margin-right: $space;
+  }
+
+  &.width-wide {
     max-width: $content-width-wide;
   }
 
-  &.alignfull {
-    max-width: $content-width-full;
+  &.width-narrow {
+    max-width: $content-width;
   }
 }
