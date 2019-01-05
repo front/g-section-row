@@ -8,6 +8,7 @@ import { element, i18n, components, editor } from 'wp';
  * Internal dependencies
  */
 import './style.scss';
+import './editor.scss';
 
 const { Fragment } = element;
 const { __ } = i18n;
@@ -16,27 +17,37 @@ const { __ } = i18n;
 const {
   PanelBody,
   PanelRow,
-  SelectControl /* IconButton, Toolbar*/,
+  SelectControl,
+  Toolbar,
+  IconButton,
+  Button,
 } = components;
 
 const {
   InspectorControls,
   InnerBlocks,
-  PanelColorSettings /* BlockControls*/,
+  PanelColorSettings,
+  BlockControls,
+  MediaUpload,
 } = editor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
+    default: 'full',
   },
-  // backgroundUrl: {
-  //   type: 'string', // Or object?
-  // },
-  backgroundImagePosition: {
+  backgroundImage: {
     type: 'string',
   },
-  backgroundImageSize: {
+  backgroundImageId: {
+    type: 'number',
+  },
+  backgroundPosition: {
+    type: 'string',
+    default: 'center',
+  },
+  backgroundSize: {
     type: 'string',
     default: 'cover',
   },
@@ -98,10 +109,17 @@ export const settings = {
     html: false,
   },
 
-  edit ({ attributes, className, setAttributes }) {
+  // Enable wide and full with in editor
+  getEditWrapperProps (attributes) {
+    const { width } = attributes;
+    return { 'data-align': width };
+  },
+
+  edit ({ attributes, className, setAttributes, isSelected }) {
     const {
       width,
-      // backgroundUrl,
+      backgroundImage,
+      backgroundImageId,
       backgroundPosition,
       backgroundSize,
       backgroundColor,
@@ -132,8 +150,8 @@ export const settings = {
 
     const widthOptions = [
       { label: __('Default'), value: '' },
-      { label: __('Wide'), value: 'alignwide' },
-      { label: __('Full width'), value: 'alignfull' },
+      { label: __('Wide'), value: 'wide' },
+      { label: __('Full width'), value: 'full' },
     ];
 
     const bgPositionOptions = [
@@ -153,7 +171,7 @@ export const settings = {
 
     const classes = [className];
     if (width) {
-      classes.push(width);
+      classes.push(`align${width}`);
     }
     if (height) {
       classes.push(`height-${height}`);
@@ -181,13 +199,51 @@ export const settings = {
     if (backgroundSize) {
       styles.backgroundSize = backgroundSize;
     }
+    if (backgroundImage) {
+      styles.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    const onSelectBgImage = ({ url, id }) =>
+      setAttributes({ backgroundImage: url, backgroundImageId: id });
+
+    const onRemoveImage = () => {
+      setAttributes({
+        backgroundImageId: null,
+        backgroundImage: null,
+      });
+    };
 
     return (
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')} style={styles}>
+          {backgroundImageId && isSelected && (
+            <Button
+              className="remove-image button"
+              onClick={onRemoveImage}
+              children={__('Remove background image')}
+            />
+          )}
           <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
         </div>
+
+        <BlockControls>
+          <Toolbar>
+            <MediaUpload
+              type="image"
+              onSelect={onSelectBgImage}
+              value={backgroundImageId}
+              render={({ open }) => (
+                <IconButton
+                  className="components-toolbar__control"
+                  label={__('Background image')}
+                  icon="edit"
+                  onClick={open}
+                />
+              )}
+            />
+          </Toolbar>
+        </BlockControls>
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
@@ -220,6 +276,13 @@ export const settings = {
                   setAttributes({ backgroundColor });
                 },
                 label: __('Background Color'),
+                colors: [
+                  {
+                    slug: 'red',
+                    name: 'Red',
+                    color: '#ff0000',
+                  },
+                ],
               },
             ]}
           />
@@ -292,6 +355,7 @@ export const settings = {
     const {
       width,
       // backgroundImageUrl,
+      backgroundImage,
       backgroundPosition,
       backgroundSize,
       backgroundColor,
@@ -304,7 +368,7 @@ export const settings = {
 
     const classes = [className];
     if (width) {
-      classes.push(width);
+      classes.push(`align${width}`);
     }
     if (height) {
       classes.push(`height-${height}`);
@@ -331,6 +395,9 @@ export const settings = {
     }
     if (backgroundSize) {
       styles.backgroundSize = backgroundSize;
+    }
+    if (backgroundImage) {
+      styles.backgroundImage = `url(${backgroundImage})`;
     }
 
     return (

@@ -1,0 +1,15 @@
+.wp-block-cloudblocks-section-row {
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  .wp-block {
+    max-width: none;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  &.alignfull > .editor-inner-blocks > .editor-block-list__layout > .wp-block {
+    margin-left: 43px !important;
+    margin-right: 43px !important;
+  }
+}

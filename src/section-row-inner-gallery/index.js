@@ -8,6 +8,7 @@ import { element, i18n, components, editor } from 'wp';
  * Internal dependencies
  */
 import './style.scss';
+import './editor.scss';
 
 const { Fragment } = element;
 const { __ } = i18n;
