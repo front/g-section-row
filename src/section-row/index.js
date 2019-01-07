@@ -22,6 +22,7 @@ const {
   IconButton,
   Button,
   RangeControl,
+  ToggleControl,
 } = components;
 
 const {
@@ -78,10 +79,10 @@ const BLOCK_ATTRIBUTES = {
   //   type: 'string',
   //   default: 'div',
   // },
-  // behindPageHeader: {
-  //   type: 'bool',
-  //   default: false,
-  // },
+  behindPageHeader: {
+    type: 'bool',
+    default: false,
+  },
   // scrollBtn: {
   //   type: 'bool',
   //   default: false,
@@ -143,6 +144,7 @@ export const settings = {
       marginTop,
       marginBottom,
       height,
+      behindPageHeader,
     } = attributes;
 
     const spaceOptions = [
@@ -202,6 +204,9 @@ export const settings = {
     }
     if (paddingBottom) {
       classes.push(`padding-bottom-${paddingBottom}`);
+    }
+    if (behindPageHeader && height) {
+      classes.push('behind-page-header');
     }
 
     const styles = {};
@@ -269,7 +274,7 @@ export const settings = {
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
-          <PanelBody>
+          <PanelBody title={__('Width and Height')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="width">{__('Width')}</label>
               <SelectControl
@@ -288,8 +293,20 @@ export const settings = {
                 onChange={height => setAttributes({ height })}
               />
             </PanelRow>
+            {height && (
+              <PanelRow>
+                <ToggleControl
+                  label={__('Behind Page Header')}
+                  checked={behindPageHeader}
+                  onChange={() =>
+                    setAttributes({ behindPageHeader: !behindPageHeader })
+                  }
+                />
+              </PanelRow>
+            )}
           </PanelBody>
           <PanelColorSettings
+            initialOpen={false}
             title={__('Background Color')}
             colorSettings={[
               {
@@ -388,6 +405,7 @@ export const settings = {
       marginTop,
       marginBottom,
       height,
+      behindPageHeader,
     } = attributes;
 
     const classes = [className];
@@ -408,6 +426,9 @@ export const settings = {
     }
     if (paddingBottom) {
       classes.push(`padding-bottom-${paddingBottom}`);
+    }
+    if (behindPageHeader && height) {
+      classes.push('behind-page-header');
     }
 
     const styles = {};
