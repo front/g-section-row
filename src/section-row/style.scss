@@ -8,6 +8,15 @@
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
+  position: relative;
+
+  .background-color {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 
   // Width
   // &.width-wide {

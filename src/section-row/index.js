@@ -21,6 +21,7 @@ const {
   Toolbar,
   IconButton,
   Button,
+  RangeControl,
 } = components;
 
 const {
@@ -54,7 +55,10 @@ const BLOCK_ATTRIBUTES = {
   backgroundColor: {
     type: 'string',
   },
-  // overlayOpacity: 1,
+  backgroundColorOpacity: {
+    type: 'number',
+    default: 10,
+  },
   paddingTop: {
     type: 'string',
   },
@@ -83,6 +87,16 @@ const BLOCK_ATTRIBUTES = {
   //   default: false,
   // },
 };
+
+const BackgroundColor = ({ color, opacity }) => (
+  <div
+    className="background-color"
+    style={{
+      backgroundColor: color,
+      opacity: `${(opacity * 0.1).toFixed(1)}`,
+    }}
+  />
+);
 
 const ALLOWED_BLOCKS = [
   'cloudblocks/section-row-inner-one-column',
@@ -123,6 +137,7 @@ export const settings = {
       backgroundPosition,
       backgroundSize,
       backgroundColor,
+      backgroundColorOpacity,
       paddingTop,
       paddingBottom,
       marginTop,
@@ -217,9 +232,16 @@ export const settings = {
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')} style={styles}>
+          {backgroundColor && (
+            <BackgroundColor
+              color={backgroundColor}
+              opacity={backgroundColorOpacity}
+            />
+          )}
           {backgroundImageId && isSelected && (
             <Button
-              className="remove-image button"
+              className="button"
+              style={{ position: 'relative' }}
               onClick={onRemoveImage}
               children={__('Remove background image')}
             />
@@ -276,17 +298,19 @@ export const settings = {
                   setAttributes({ backgroundColor });
                 },
                 label: __('Background Color'),
-                colors: [
-                  {
-                    slug: 'red',
-                    name: 'Red',
-                    color: '#ff0000',
-                  },
-                ],
               },
             ]}
           />
           <PanelBody title={__('Background Settings')} initialOpen={false}>
+            <RangeControl
+              label={__('Background color opacity')}
+              value={backgroundColorOpacity}
+              onChange={backgroundColorOpacity =>
+                setAttributes({ backgroundColorOpacity })
+              }
+              min={0}
+              max={10}
+            />
             <PanelRow>
               <label htmlFor="bg-position">{__('Background Position')}</label>
               <SelectControl
@@ -354,11 +378,11 @@ export const settings = {
   save ({ attributes, className }) {
     const {
       width,
-      // backgroundImageUrl,
       backgroundImage,
       backgroundPosition,
       backgroundSize,
       backgroundColor,
+      backgroundColorOpacity,
       paddingTop,
       paddingBottom,
       marginTop,
@@ -387,9 +411,6 @@ export const settings = {
     }
 
     const styles = {};
-    if (backgroundColor) {
-      styles.backgroundColor = backgroundColor;
-    }
     if (backgroundPosition) {
       styles.backgroundPosition = backgroundPosition;
     }
@@ -402,6 +423,12 @@ export const settings = {
 
     return (
       <div className={classes.join(' ')} style={styles}>
+        {backgroundColor && (
+          <BackgroundColor
+            color={backgroundColor}
+            opacity={backgroundColorOpacity}
+          />
+        )}
         <InnerBlocks.Content />
       </div>
     );
