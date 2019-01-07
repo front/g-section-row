@@ -31,12 +31,6 @@ const BLOCK_ATTRIBUTES = {
   marginBottom: {
     type: 'string',
   },
-  paddingTop: {
-    type: 'string',
-  },
-  paddingBottom: {
-    type: 'string',
-  },
 };
 
 const ALLOWED_BLOCKS = ['cloudblocks/section-row-cell'];
@@ -56,14 +50,7 @@ export const settings = {
   parent: ['cloudblocks/section-row'],
 
   edit ({ attributes, className, setAttributes }) {
-    const {
-      width,
-      fullHeight,
-      marginTop,
-      marginBottom,
-      paddingTop,
-      paddingBottom,
-    } = attributes;
+    const { width, fullHeight, marginTop, marginBottom } = attributes;
 
     const spaceOptions = [
       { label: __('None'), value: '' },
@@ -94,12 +81,6 @@ export const settings = {
     }
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
-    }
-    if (paddingTop) {
-      classes.push(`padding-top-${paddingTop}`);
-    }
-    if (paddingBottom) {
-      classes.push(`padding-bottom-${paddingBottom}`);
     }
 
     return (
@@ -134,24 +115,6 @@ export const settings = {
                 onChange={marginBottom => setAttributes({ marginBottom })}
               />
             </PanelRow>
-            <PanelRow>
-              <label htmlFor="padding-top">{__('Padding Top')}</label>
-              <SelectControl
-                id="padding-top"
-                value={paddingTop}
-                options={spaceOptions}
-                onChange={paddingTop => setAttributes({ paddingTop })}
-              />
-            </PanelRow>
-            <PanelRow>
-              <label htmlFor="padding-bottom">{__('Padding Bottom')}</label>
-              <SelectControl
-                id="padding-bottom"
-                value={paddingBottom}
-                options={spaceOptions}
-                onChange={paddingBottom => setAttributes({ paddingBottom })}
-              />
-            </PanelRow>
           </PanelBody>
           <PanelBody title={__('Width and Height')} initialOpen={false}>
             <PanelRow>
@@ -177,14 +140,7 @@ export const settings = {
   },
 
   save ({ attributes, className }) {
-    const {
-      width,
-      fullHeight,
-      marginTop,
-      marginBottom,
-      paddingTop,
-      paddingBottom,
-    } = attributes;
+    const { width, fullHeight, marginTop, marginBottom } = attributes;
 
     const classes = ['save', className];
     if (width) {
@@ -198,12 +154,6 @@ export const settings = {
     }
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
-    }
-    if (paddingTop) {
-      classes.push(`padding-top-${paddingTop}`);
-    }
-    if (paddingBottom) {
-      classes.push(`padding-bottom-${paddingBottom}`);
     }
 
     return (

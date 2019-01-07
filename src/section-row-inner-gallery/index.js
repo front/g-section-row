@@ -48,12 +48,6 @@ const BLOCK_ATTRIBUTES = {
   marginBottom: {
     type: 'string',
   },
-  paddingTop: {
-    type: 'string',
-  },
-  paddingBottom: {
-    type: 'string',
-  },
   fullHeight: {
     type: 'boolean',
     default: true,
@@ -91,8 +85,6 @@ export const settings = {
       rowGap,
       marginTop,
       marginBottom,
-      paddingTop,
-      paddingBottom,
       width,
       fullHeight,
     } = attributes;
@@ -209,24 +201,6 @@ export const settings = {
                 onChange={marginBottom => setAttributes({ marginBottom })}
               />
             </PanelRow>
-            <PanelRow>
-              <label htmlFor="padding-top">{__('Padding Top')}</label>
-              <SelectControl
-                id="padding-top"
-                value={paddingTop}
-                options={spaceOptions}
-                onChange={paddingTop => setAttributes({ paddingTop })}
-              />
-            </PanelRow>
-            <PanelRow>
-              <label htmlFor="padding-bottom">{__('Padding Bottom')}</label>
-              <SelectControl
-                id="padding-bottom"
-                value={paddingBottom}
-                options={spaceOptions}
-                onChange={paddingBottom => setAttributes({ paddingBottom })}
-              />
-            </PanelRow>
           </PanelBody>
           <PanelBody title={__('Width and Height')} initialOpen={false}>
             <PanelRow>
@@ -259,8 +233,6 @@ export const settings = {
       rowGap,
       marginTop,
       marginBottom,
-      paddingTop,
-      paddingBottom,
       fullHeight,
     } = attributes;
 
@@ -282,12 +254,6 @@ export const settings = {
     }
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
-    }
-    if (paddingTop) {
-      classes.push(`padding-top-${paddingTop}`);
-    }
-    if (paddingBottom) {
-      classes.push(`padding-bottom-${paddingBottom}`);
     }
     if (fullHeight) {
       classes.push('height-full');
