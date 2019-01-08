@@ -83,34 +83,33 @@ const BLOCK_ATTRIBUTES = {
     type: 'bool',
     default: false,
   },
-  // scrollBtn: {
-  //   type: 'bool',
-  //   default: false,
-  // },
+  skipLink: {
+    type: 'bool',
+    default: false,
+  },
 };
 
-const BackgroundColor = ({ color, opacity }) => (
-  <div
-    className="background-color"
-    style={{
-      backgroundColor: color,
-      opacity: `${(opacity * 0.1).toFixed(1)}`,
-    }}
-  />
+const BackgroundImage = ({ style }) => (
+  <div className="background-image" style={style} />
+);
+
+const BackgroundColor = ({ style }) => (
+  <div className="background-color" style={style} />
 );
 
 const ALLOWED_BLOCKS = [
   'cloudblocks/section-row-inner-one-column',
   'cloudblocks/section-row-inner-two-columns',
+  'cloudblocks/section-row-inner-gallery',
 ];
 
 const TEMPLATE = [
   [
     'cloudblocks/section-row-inner-one-column',
-    {},
     [['cloudblocks/section-row-cell']],
   ],
 ];
+
 export const name = 'section-row';
 
 export const settings = {
@@ -145,6 +144,7 @@ export const settings = {
       marginBottom,
       height,
       behindPageHeader,
+      skipLink,
     } = attributes;
 
     const spaceOptions = [
@@ -209,18 +209,25 @@ export const settings = {
       classes.push('behind-page-header');
     }
 
-    const styles = {};
-    if (backgroundColor) {
-      styles.backgroundColor = backgroundColor;
-    }
+    const backgroundImgStyle = {};
     if (backgroundPosition) {
-      styles.backgroundPosition = backgroundPosition;
+      backgroundImgStyle.backgroundPosition = backgroundPosition;
     }
     if (backgroundSize) {
-      styles.backgroundSize = backgroundSize;
+      backgroundImgStyle.backgroundSize = backgroundSize;
     }
     if (backgroundImage) {
-      styles.backgroundImage = `url(${backgroundImage})`;
+      backgroundImgStyle.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    const backgroundColorStyle = {};
+    if (backgroundColor) {
+      backgroundColorStyle.backgroundColor = backgroundColor;
+    }
+    if (backgroundColorOpacity) {
+      backgroundColorStyle.opacity = `${(backgroundColorOpacity * 0.1).toFixed(
+        1
+      )}`;
     }
 
     const onSelectBgImage = ({ url, id }) =>
@@ -236,13 +243,9 @@ export const settings = {
     return (
       <Fragment>
         {/* Block markup (main editor) */}
-        <div className={classes.join(' ')} style={styles}>
-          {backgroundColor && (
-            <BackgroundColor
-              color={backgroundColor}
-              opacity={backgroundColorOpacity}
-            />
-          )}
+        <div className={classes.join(' ')}>
+          {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
+          {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
           {backgroundImageId && isSelected && (
             <Button
               className="button"
@@ -252,6 +255,13 @@ export const settings = {
             />
           )}
           <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
+          {skipLink && (
+            <div className="container js-smooth-scroll">
+              <a className="skip-link screen-reader-text" href="">
+                {__('Scroll down')}
+              </a>
+            </div>
+          )}
         </div>
 
         <BlockControls>
@@ -304,6 +314,13 @@ export const settings = {
                 />
               </PanelRow>
             )}
+            <PanelRow>
+              <ToggleControl
+                label={__('Skip link')}
+                checked={skipLink}
+                onChange={() => setAttributes({ skipLink: !skipLink })}
+              />
+            </PanelRow>
           </PanelBody>
           <PanelColorSettings
             initialOpen={false}
@@ -325,7 +342,7 @@ export const settings = {
               onChange={backgroundColorOpacity =>
                 setAttributes({ backgroundColorOpacity })
               }
-              min={0}
+              min={1}
               max={10}
             />
             <PanelRow>
@@ -406,6 +423,7 @@ export const settings = {
       marginBottom,
       height,
       behindPageHeader,
+      skipLink,
     } = attributes;
 
     const classes = [className];
@@ -431,26 +449,39 @@ export const settings = {
       classes.push('behind-page-header');
     }
 
-    const styles = {};
+    const backgroundImgStyle = {};
     if (backgroundPosition) {
-      styles.backgroundPosition = backgroundPosition;
+      backgroundImgStyle.backgroundPosition = backgroundPosition;
     }
     if (backgroundSize) {
-      styles.backgroundSize = backgroundSize;
+      backgroundImgStyle.backgroundSize = backgroundSize;
     }
     if (backgroundImage) {
-      styles.backgroundImage = `url(${backgroundImage})`;
+      backgroundImgStyle.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    const backgroundColorStyle = {};
+    if (backgroundColor) {
+      backgroundColorStyle.backgroundColor = backgroundColor;
+    }
+    if (backgroundColorOpacity) {
+      backgroundColorStyle.opacity = `${(backgroundColorOpacity * 0.1).toFixed(
+        1
+      )}`;
     }
 
     return (
-      <div className={classes.join(' ')} style={styles}>
-        {backgroundColor && (
-          <BackgroundColor
-            color={backgroundColor}
-            opacity={backgroundColorOpacity}
-          />
-        )}
+      <div className={classes.join(' ')}>
+        {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
+        {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
         <InnerBlocks.Content />
+        {skipLink && (
+          <div className="container js-smooth-scroll">
+            <a className="skip-link screen-reader-text" href="">
+              {__('Scroll down')}
+            </a>
+          </div>
+        )}
       </div>
     );
   },
