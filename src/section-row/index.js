@@ -75,10 +75,10 @@ const BLOCK_ATTRIBUTES = {
   height: {
     type: 'string',
   },
-  // htmlElement: {
-  //   type: 'string',
-  //   default: 'div',
-  // },
+  htmlElement: {
+    type: 'string',
+    default: 'div',
+  },
   behindPageHeader: {
     type: 'bool',
     default: false,
@@ -145,6 +145,7 @@ export const settings = {
       height,
       behindPageHeader,
       skipLink,
+      htmlElement,
     } = attributes;
 
     const spaceOptions = [
@@ -284,6 +285,20 @@ export const settings = {
 
         <InspectorControls>
           {/* Block settings (sidebar) */}
+          <PanelBody>
+            <PanelRow>
+              <label htmlFor="element">{__('Html element')}</label>
+              <SelectControl
+                id="element"
+                value={htmlElement}
+                options={[
+                  { label: 'Div', value: 'div' },
+                  { label: 'Section', value: 'section' },
+                ]}
+                onChange={htmlElement => setAttributes({ htmlElement })}
+              />
+            </PanelRow>
+          </PanelBody>
           <PanelBody title={__('Width and Height')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="width">{__('Width')}</label>
@@ -424,6 +439,7 @@ export const settings = {
       height,
       behindPageHeader,
       skipLink,
+      htmlElement: HtmlElement,
     } = attributes;
 
     const classes = [className];
@@ -471,7 +487,7 @@ export const settings = {
     }
 
     return (
-      <div className={classes.join(' ')}>
+      <HtmlElement className={classes.join(' ')}>
         {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
         {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
         <InnerBlocks.Content />
@@ -482,7 +498,7 @@ export const settings = {
             </a>
           </div>
         )}
-      </div>
+      </HtmlElement>
     );
   },
 };
