@@ -56,9 +56,9 @@ const BLOCK_ATTRIBUTES = {
 
 const ALLOWED_BLOCKS = ['cloudblocks/section-row-cell'];
 
-function getTemplate (galleryItem) {
+function getTemplate (childBlocks) {
   const galleryItemBlocks = [];
-  for (let i = 0; i < galleryItem; i++) {
+  for (let i = 0; i < childBlocks; i++) {
     galleryItemBlocks.push(['cloudblocks/section-row-cell']);
   }
   return galleryItemBlocks;
@@ -77,7 +77,7 @@ export const settings = {
 
   parent: ['cloudblocks/section-row'],
 
-  edit ({ attributes, className, setAttributes }) {
+  edit ({ attributes, className, setAttributes, clientId }) {
     const {
       columns,
       galleryItems,
@@ -106,7 +106,7 @@ export const settings = {
       { label: __('Narrow'), value: 'width-narrow' },
     ];
 
-    const classes = ['edit', className];
+    const classes = [className];
     if (width) {
       classes.push(width);
     }
@@ -125,12 +125,6 @@ export const settings = {
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
     }
-    if (paddingTop) {
-      classes.push(`padding-top-${paddingTop}`);
-    }
-    if (paddingBottom) {
-      classes.push(`padding-bottom-${paddingBottom}`);
-    }
     if (fullHeight) {
       classes.push('height-full');
     }
@@ -142,7 +136,7 @@ export const settings = {
           <InnerBlocks
             allowedBlocks={ALLOWED_BLOCKS}
             template={getTemplate(galleryItems)}
-            templateLock="insert"
+            templateLock="all"
           />
         </div>
 

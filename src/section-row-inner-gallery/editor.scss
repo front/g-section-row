@@ -1,4 +1,56 @@
+@import "../styles/variables";
+@import "../styles/spacing";
+
 .wp-block-cloudblocks-section-row-inner-gallery {
-  // padding-left: 10px;
-  // padding-right: 10px;
+  > div > .editor-block-list__layout {
+    display: flex; // IE11
+    flex-wrap: wrap; // IE11
+    display: grid;
+  }
+
+  @media (min-width: $break-small) {
+    &.columns-1 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &.columns-2 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &.columns-3 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &.columns-4 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &.columns-5 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    &.columns-6 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    &.columns-7 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(7, 1fr);
+    }
+    &.columns-8 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(8, 1fr);
+    }
+    &.columns-9 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(9, 1fr);
+    }
+    &.columns-10 > div > .editor-block-list__layout {
+      grid-template-columns: repeat(10, 1fr);
+    }
+  }
+
+  &.height-full {
+    height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)
+    min-height: 100%;
+  }
+
+  // Editor overrides
+  > .editor-inner-blocks
+    > .editor-block-list__layout
+    > .editor-block-list__block:first-child
+    > .editor-block-list__block-edit {
+    margin-top: 32px;
+  }
 }
