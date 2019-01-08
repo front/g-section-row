@@ -3,15 +3,15 @@
 A collection of blocks that compose together to create flexible sections. The structure of the blocks are as follows:
 
 - Section Row
-  -- Row Inner One Column
-  --- Section Cell
-  -- Row Inner Two Columns
-  --- Section Cell
-  --- Section Cell
-  -- Row Inner Gallery
-  --- Section Cell
-  --- Section Cell
-  --- Section Cell
+  - Row Inner One Column
+    - Section Cell
+  - Row Inner Two Columns
+    - Section Cell
+    - Section Cell
+  - Row Inner Gallery
+    - Section Cell
+    - Section Cell
+    - Section Cell
 
 ## Section Row Block
 
@@ -23,12 +23,18 @@ Section row is the root block where we can add on or more of the following block
 
 ### Settings
 
-- Widht
+- Html element [div, section]
+- Width
 - Height
+- Behind page header
 - Background image
-- Backgrouind color
+- Background image position
+- Background image size 
+- Background color
+- Background color opacity
 - Top and bottom padding
 - Top and bottom margin
+- Skip link
 
 ## Row Inner One Column Block
 
@@ -38,8 +44,7 @@ Row inner one column can be put inside Section Row, and has a Row Cell child blo
 
 - Widht
 - Height
-- Tob and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
-- Top and bottom padding (will be removed)
+- Top and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
 
 ## Row Inner Two Column Block
 
@@ -52,8 +57,7 @@ Row inner two columns can be put inside Section Row, and has two Row Cell child 
 - Split [One to One, One to Two, Two to One, One to Three, Three to One, One to Four, Four to One]
 - Column gap [xsmall, small, medium, large, xlarge, xxlarge]
 - Invert
-- Tob and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
-- Top and bottom padding (will be removed)
+- Top and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
 
 ## Row Inner Gallery Block
 
@@ -68,7 +72,6 @@ Row inner gallery columns can be put inside Section Row, and has two or more Row
 - Column gap [xsmall, small, medium, large, xlarge, xxlarge]
 - Row gap [xsmall, small, medium, large, xlarge, xxlarge]
 - Tob and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
-- Top and bottom padding (will be removed)
 
 ## Row cell
 
