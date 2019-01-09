@@ -389,7 +389,10 @@ export const settings = {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={__('Vertical space & alignment')} initialOpen={false}>
+          <PanelBody
+            title={__('Vertical space & alignment')}
+            initialOpen={false}
+          >
             <PanelRow>
               <label htmlFor="margin-top">{__('Margin Top')}</label>
               <SelectControl
@@ -427,7 +430,9 @@ export const settings = {
               />
             </PanelRow>
             <PanelRow>
-              <label htmlFor="valign-content">{__('Vertical Align Content')}</label>
+              <label htmlFor="valign-content">
+                {__('Vertical Align Content')}
+              </label>
               <SelectControl
                 id="valign-content"
                 value={justifyContent}

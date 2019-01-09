@@ -14,24 +14,13 @@ const { Fragment } = element;
 const { __ } = i18n;
 
 // TODO: Chooose components for the sidebar settings
-const {
-  PanelBody,
-  PanelRow,
-  SelectControl,
-  ToggleControl,
-  // IconButton,
-  // Toolbar,
-} = components;
-const { InspectorControls, InnerBlocks /* , BlockControls */ } = editor;
+const { PanelBody, PanelRow, SelectControl, ToggleControl } = components;
+const { InspectorControls, InnerBlocks } = editor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
-  },
-  fullHeight: {
-    type: 'boolean',
-    default: true,
   },
   split: {
     type: 'string',
@@ -75,7 +64,6 @@ export const settings = {
   edit ({ attributes, className, setAttributes }) {
     const {
       width,
-      fullHeight,
       split,
       columnGap,
       reverse,
@@ -102,9 +90,6 @@ export const settings = {
     const classes = ['edit', className];
     if (width) {
       classes.push(width);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
     if (split) {
       classes.push(split);
@@ -193,7 +178,7 @@ export const settings = {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={__('Width and Height')} initialOpen={false}>
+          <PanelBody title={__('Width')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="row-width">{__('Inner row width')}</label>
               <SelectControl
@@ -201,13 +186,6 @@ export const settings = {
                 value={width}
                 options={widthOptions}
                 onChange={width => setAttributes({ width })}
-              />
-            </PanelRow>
-            <PanelRow>
-              <ToggleControl
-                label={__('Full Height')}
-                checked={fullHeight}
-                onChange={() => setAttributes({ fullHeight: !fullHeight })}
               />
             </PanelRow>
           </PanelBody>
@@ -219,7 +197,6 @@ export const settings = {
   save ({ attributes, className }) {
     const {
       width,
-      fullHeight,
       split,
       columnGap,
       reverse,
@@ -230,9 +207,6 @@ export const settings = {
     const classes = ['save', className];
     if (width) {
       classes.push(width);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
     if (split) {
       classes.push(split);

@@ -13,17 +13,13 @@ import './editor.scss';
 const { Fragment } = element;
 const { __ } = i18n;
 
-const { PanelBody, PanelRow, SelectControl, ToggleControl } = components;
+const { PanelBody, PanelRow, SelectControl } = components;
 
 const { InspectorControls, InnerBlocks } = editor;
 
 const BLOCK_ATTRIBUTES = {
   width: {
     type: 'string',
-  },
-  fullHeight: {
-    type: 'boolean',
-    default: true,
   },
   marginTop: {
     type: 'string',
@@ -50,7 +46,7 @@ export const settings = {
   parent: ['cloudblocks/section-row'],
 
   edit ({ attributes, className, setAttributes }) {
-    const { width, fullHeight, marginTop, marginBottom } = attributes;
+    const { width, marginTop, marginBottom } = attributes;
 
     const spaceOptions = [
       { label: __('None'), value: '' },
@@ -71,9 +67,6 @@ export const settings = {
     const classes = ['edit', className];
     if (width) {
       classes.push(width);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
     if (marginTop) {
       classes.push(`margin-top-${marginTop}`);
@@ -115,7 +108,7 @@ export const settings = {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={__('Width and Height')} initialOpen={false}>
+          <PanelBody title={__('Width')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="row-width">{__('Inner row width')}</label>
               <SelectControl
@@ -125,13 +118,6 @@ export const settings = {
                 onChange={width => setAttributes({ width })}
               />
             </PanelRow>
-            <PanelRow>
-              <ToggleControl
-                label={__('Full Height')}
-                checked={fullHeight}
-                onChange={() => setAttributes({ fullHeight: !fullHeight })}
-              />
-            </PanelRow>
           </PanelBody>
         </InspectorControls>
       </Fragment>
@@ -139,14 +125,11 @@ export const settings = {
   },
 
   save ({ attributes, className }) {
-    const { width, fullHeight, marginTop, marginBottom } = attributes;
+    const { width, marginTop, marginBottom } = attributes;
 
     const classes = ['save', className];
     if (width) {
       classes.push(width);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
     if (marginTop) {
       classes.push(`margin-top-${marginTop}`);

@@ -44,7 +44,6 @@ Row inner one column can be put inside Section Row, and has a Row Cell child blo
 ### Settings
 
 - Widht
-- Height
 - Top and bottom margin [xsmall, small, medium, large, xlarge, xxlarge]
 
 ## Row Inner Two Column Block
@@ -54,7 +53,6 @@ Row inner two columns can be put inside Section Row, and has two Row Cell child 
 ### Settings
 
 - Widht
-- Height
 - Split [One to One, One to Two, Two to One, One to Three, Three to One, One to Four, Four to One]
 - Column gap [xsmall, small, medium, large, xlarge, xxlarge]
 - Invert
@@ -67,7 +65,6 @@ Row inner gallery columns can be put inside Section Row, and has two or more Row
 ### Settings
 
 - Widht
-- Height
 - Columns 1-10
 - Gallery items 2-40
 - Column gap [xsmall, small, medium, large, xlarge, xxlarge]

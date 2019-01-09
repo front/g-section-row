@@ -13,13 +13,7 @@ import './editor.scss';
 const { Fragment } = element;
 const { __ } = i18n;
 
-const {
-  PanelBody,
-  PanelRow,
-  SelectControl,
-  RangeControl,
-  ToggleControl,
-} = components;
+const { PanelBody, PanelRow, SelectControl, RangeControl } = components;
 const { InspectorControls, InnerBlocks } = editor;
 
 const BLOCK_ATTRIBUTES = {
@@ -48,10 +42,6 @@ const BLOCK_ATTRIBUTES = {
   marginBottom: {
     type: 'string',
   },
-  fullHeight: {
-    type: 'boolean',
-    default: true,
-  },
 };
 
 const ALLOWED_BLOCKS = ['cloudblocks/section-row-cell'];
@@ -77,7 +67,7 @@ export const settings = {
 
   parent: ['cloudblocks/section-row'],
 
-  edit ({ attributes, className, setAttributes, clientId }) {
+  edit ({ attributes, className, setAttributes }) {
     const {
       columns,
       galleryItems,
@@ -86,7 +76,6 @@ export const settings = {
       marginTop,
       marginBottom,
       width,
-      fullHeight,
     } = attributes;
 
     const spaceOptions = [
@@ -123,9 +112,6 @@ export const settings = {
     }
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
 
     return (
@@ -195,7 +181,7 @@ export const settings = {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={__('Width and Height')} initialOpen={false}>
+          <PanelBody title={__('Width')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="row-width">{__('Inner row width')}</label>
               <SelectControl
@@ -203,13 +189,6 @@ export const settings = {
                 value={width}
                 options={widthOptions}
                 onChange={width => setAttributes({ width })}
-              />
-            </PanelRow>
-            <PanelRow>
-              <ToggleControl
-                label={__('Full Height')}
-                checked={fullHeight}
-                onChange={() => setAttributes({ fullHeight: !fullHeight })}
               />
             </PanelRow>
           </PanelBody>
@@ -226,7 +205,6 @@ export const settings = {
       rowGap,
       marginTop,
       marginBottom,
-      fullHeight,
     } = attributes;
 
     const classes = ['save', className];
@@ -247,9 +225,6 @@ export const settings = {
     }
     if (marginBottom) {
       classes.push(`margin-bottom-${marginBottom}`);
-    }
-    if (fullHeight) {
-      classes.push('height-full');
     }
 
     return (
