@@ -10,6 +10,23 @@
   margin-bottom: 0;
   position: relative;
 
+  &[class*="justify-content-"] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.justify-content-center {
+    justify-content: center;
+  }
+  
+  &.justify-content-flex-start {
+    justify-content: flex-start;
+  }
+
+  &.justify-content-flex-end {
+    justify-content: flex-end;
+  }
+
   .background-color,
   .background-image {
     position: absolute;
@@ -20,45 +37,19 @@
     z-index: -1;
   }
 
-  // Width
-  // &.width-wide {
-  //   $negative-margin: ($content-width-wide - $content-width) * 0.5;
-  //   // max-width: $content-width-wide;
-  //   margin-left: -$negative-margin;
-  //   margin-right: -$negative-margin;
-  //   max-width: unset;
-  //   width: unset;
-  // }
-
-  // &.width-full {
-  //   width: $content-width-full;
-  //   max-width: $content-width-full;
-  //   margin-left: calc(-50vw + 50%);
-  //   margin-right: calc(-50vw + 50%);
-  //   padding-left: 0;
-  //   padding-right: 0;
-  //   position: relative;
-  //   overflow: hidden;
-  // }
-
-  // Height
-  &.height-auto {
-    height: auto;
-  }
-
   &.height-one-third {
-    height: 33.33vh;
+    min-height: 33.33vh;
   }
 
   &.height-half {
-    height: 50vh;
+    min-height: 50vh;
   }
 
   &.height-two-third {
-    height: 66.66vh;
+    min-height: 66.66vh;
   }
 
   &.height-full {
-    height: 100vh;
+    min-height: 100vh;
   }
 }

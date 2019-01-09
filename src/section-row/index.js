@@ -75,6 +75,10 @@ const BLOCK_ATTRIBUTES = {
   height: {
     type: 'string',
   },
+  justifyContent: {
+    type: 'string',
+    default: 'center',
+  },
   htmlElement: {
     type: 'string',
     default: 'div',
@@ -146,6 +150,7 @@ export const settings = {
       behindPageHeader,
       skipLink,
       htmlElement,
+      justifyContent,
     } = attributes;
 
     const spaceOptions = [
@@ -209,6 +214,9 @@ export const settings = {
     if (behindPageHeader && height) {
       classes.push('behind-page-header');
     }
+    if (justifyContent) {
+      classes.push(`justify-content-${justifyContent}`);
+    }
 
     const backgroundImgStyle = {};
     if (backgroundPosition) {
@@ -250,7 +258,7 @@ export const settings = {
           {backgroundImageId && isSelected && (
             <Button
               className="button"
-              style={{ position: 'relative' }}
+              style={{ position: 'absolute', top: 0, zIndex: 10 }}
               onClick={onRemoveImage}
               children={__('Remove background image')}
             />
@@ -381,7 +389,7 @@ export const settings = {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={__('Vertical space')} initialOpen={false}>
+          <PanelBody title={__('Vertical space & alignment')} initialOpen={false}>
             <PanelRow>
               <label htmlFor="margin-top">{__('Margin Top')}</label>
               <SelectControl
@@ -418,6 +426,19 @@ export const settings = {
                 onChange={paddingBottom => setAttributes({ paddingBottom })}
               />
             </PanelRow>
+            <PanelRow>
+              <label htmlFor="valign-content">{__('Vertical Align Content')}</label>
+              <SelectControl
+                id="valign-content"
+                value={justifyContent}
+                options={[
+                  { label: __('Top'), value: 'flex-start' },
+                  { label: __('Center'), value: 'center' },
+                  { label: __('Bottom'), value: 'flex-end' },
+                ]}
+                onChange={justifyContent => setAttributes({ justifyContent })}
+              />
+            </PanelRow>
           </PanelBody>
         </InspectorControls>
       </Fragment>
@@ -440,6 +461,7 @@ export const settings = {
       behindPageHeader,
       skipLink,
       htmlElement: HtmlElement,
+      justifyContent,
     } = attributes;
 
     const classes = [className];
@@ -463,6 +485,9 @@ export const settings = {
     }
     if (behindPageHeader && height) {
       classes.push('behind-page-header');
+    }
+    if (justifyContent) {
+      classes.push(`justify-content-${justifyContent}`);
     }
 
     const backgroundImgStyle = {};

@@ -34,6 +34,7 @@ Section row is the root block where we can add on or more of the following block
 - Background color opacity
 - Top and bottom padding
 - Top and bottom margin
+- Vertical align content [top, center, bottom]
 - Skip link
 
 ## Row Inner One Column Block
