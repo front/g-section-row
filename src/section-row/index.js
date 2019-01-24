@@ -133,7 +133,7 @@ export const settings = {
     return { 'data-align': width };
   },
 
-  edit ({ attributes, className, setAttributes, isSelected }) {
+  edit ({ attributes, className, setAttributes }) {
     const {
       width,
       backgroundImage,
