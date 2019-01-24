@@ -164,11 +164,11 @@ export const settings = {
     ];
 
     const heightOptions = [
-      { label: 'Auto', value: '' },
-      { label: 'One Third', value: 'one-third' },
-      { label: 'Half', value: 'half' },
-      { label: 'Two third', value: 'two-third' },
-      { label: 'Full', value: 'full' },
+      { label: __('Auto'), value: '' },
+      { label: __('One Third'), value: 'one-third' },
+      { label: __('Half'), value: 'half' },
+      { label: __('Two third'), value: 'two-third' },
+      { label: __('Full'), value: 'full' },
     ];
 
     const widthOptions = [
@@ -178,12 +178,12 @@ export const settings = {
     ];
 
     const bgPositionOptions = [
-      { label: 'None', value: '' },
-      { label: 'Center', value: 'center' },
-      { label: 'Center Top', value: 'center top' },
-      { label: 'Center Bottom', value: 'center bottom' },
-      { label: 'Left Center', value: 'left center' },
-      { label: 'Right Center', value: 'right center' },
+      { label: __('None'), value: '' },
+      { label: __('Center'), value: 'center' },
+      { label: __('Center Top'), value: 'center top' },
+      { label: __('Center Bottom'), value: 'center bottom' },
+      { label: __('Left Center'), value: 'left center' },
+      { label: __('Right Center'), value: 'right center' },
     ];
 
     const bgSizeOptions = [
