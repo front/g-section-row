@@ -12,4 +12,13 @@
     margin-left: 43px !important;
     margin-right: 43px !important;
   }
+
+  [class*="-section-row-inner-"] {
+    > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block,
+    > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block > .editor-block-list__block-edit,
+    > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block > .editor-block-list__block-edit > div {
+      display: flex;
+      flex-grow: 1;
+    }
+  }
 }
