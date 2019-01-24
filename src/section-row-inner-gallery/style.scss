@@ -6,6 +6,7 @@
   display: flex; // IE11
   flex-wrap: wrap; // IE11
   display: grid;
+  grid-row-gap: $space-half;
 
   @media (min-width: $break-small) {
     &.columns-1 {

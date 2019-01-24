@@ -5,6 +5,7 @@
 .wp-block-cloudblocks-section-row-inner-two-columns.save {
   display: flex; // IE11
   display: grid;
+  grid-row-gap: $space-half;
 
   &.column-reverse {
     @media (min-width: $break-small) {
