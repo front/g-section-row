@@ -239,8 +239,12 @@ export const settings = {
       )}`;
     }
 
-    const onSelectBgImage = ({ url, id }) =>
-      setAttributes({ backgroundImage: url, backgroundImageId: id });
+    const onSelectBgImage = ({
+      id,
+      sizes: {
+        large: { url },
+      },
+    }) => setAttributes({ backgroundImage: url, backgroundImageId: id });
 
     const onRemoveBgImage = () => {
       setAttributes({
