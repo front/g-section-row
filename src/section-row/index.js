@@ -20,9 +20,9 @@ const {
   SelectControl,
   Toolbar,
   IconButton,
-  Button,
   RangeControl,
   ToggleControl,
+  ToolbarButton,
 } = components;
 
 const {
@@ -242,7 +242,7 @@ export const settings = {
     const onSelectBgImage = ({ url, id }) =>
       setAttributes({ backgroundImage: url, backgroundImageId: id });
 
-    const onRemoveImage = () => {
+    const onRemoveBgImage = () => {
       setAttributes({
         backgroundImageId: null,
         backgroundImage: null,
@@ -255,14 +255,6 @@ export const settings = {
         <div className={classes.join(' ')}>
           {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
           {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
-          {backgroundImageId && isSelected && (
-            <Button
-              className="button"
-              style={{ position: 'absolute', top: 0, zIndex: 10 }}
-              onClick={onRemoveImage}
-              children={__('Remove background image')}
-            />
-          )}
           <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
           {skipLink && (
             <div className="container js-smooth-scroll">
@@ -282,12 +274,19 @@ export const settings = {
               render={({ open }) => (
                 <IconButton
                   className="components-toolbar__control"
-                  label={__('Background image')}
-                  icon="edit"
+                  label={__('Add/Edit background image')}
+                  icon="format-image"
                   onClick={open}
                 />
               )}
             />
+            {backgroundImageId && (
+              <ToolbarButton
+                title={__('Remove background image')}
+                icon="trash"
+                onClick={onRemoveBgImage}
+              />
+            )}
           </Toolbar>
         </BlockControls>
 
