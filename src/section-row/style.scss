@@ -39,17 +39,37 @@
 
   &.height-one-third {
     min-height: 33.33vh;
+    height: 33.33vh; // IE11 fix
+
+    @supports (display: grid) {
+      height: auto;
+    }
   }
 
   &.height-half {
     min-height: 50vh;
+    height: 50vh; // IE11 fix
+
+    @supports (display: grid) {
+      height: auto;
+    }
   }
 
   &.height-two-third {
     min-height: 66.66vh;
+    height: 66.66vh; // IE11 fix
+
+    @supports (display: grid) {
+      height: auto;
+    }
   }
 
   &.height-full {
     min-height: 100vh;
+    height: 100vh;
+
+    @supports (display: grid) {
+      height: auto;
+    }
   }
 }
