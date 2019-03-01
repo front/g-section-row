@@ -5,39 +5,83 @@
 .wp-block-cloudblocks-section-row-inner-gallery.save {
   display: flex; // IE11
   flex-wrap: wrap; // IE11
-  display: grid;
+  justify-content: space-between; // IE11
   grid-row-gap: $space-half;
+
+  @supports (display: grid) { // Above IE11
+    display: grid;
+  }
 
   @media (min-width: $break-small) {
     &.columns-1 {
       grid-template-columns: repeat(1, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 1) - 2;
+      }
     }
     &.columns-2 {
       grid-template-columns: repeat(2, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 2) - 2;
+      }
     }
     &.columns-3 {
       grid-template-columns: repeat(3, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 3) - 2;
+      }
     }
     &.columns-4 {
       grid-template-columns: repeat(4, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 4) - 2;
+      }
     }
     &.columns-5 {
       grid-template-columns: repeat(5, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 5) - 2;
+      }
     }
     &.columns-6 {
       grid-template-columns: repeat(6, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 6) - 2;
+      }
     }
     &.columns-7 {
       grid-template-columns: repeat(7, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 7) - 2;
+      }
     }
     &.columns-8 {
       grid-template-columns: repeat(8, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 8) - 2;
+      }
     }
     &.columns-9 {
       grid-template-columns: repeat(9, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 9) - 2;
+      }
     }
     &.columns-10 {
       grid-template-columns: repeat(10, 1fr);
+
+      > .section-row-cell {
+        flex-basis: (100% / 10) - 2;
+      }
     }
   }
 
