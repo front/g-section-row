@@ -4,14 +4,60 @@
 // The class name needs to match the names of the category and block
 .wp-block-cloudblocks-section-row-inner-two-columns.save {
   display: flex; // IE11
+  height: 100%; // IE11
+  justify-content: space-between; // IE11
   display: grid;
   grid-row-gap: $space-half;
 
-  &.column-reverse {
-    @media (min-width: $break-small) {
-      .section-row-cell:first-child {
-        order: 2;
+  @supports (display: grid) { // IE11
+    height: auto;
+  }
+
+  @media (min-width: $break-small) {
+    .section-row-cell {
+      &:first-child {
+        margin-right: $space-half; // IE11
+
+        @supports (display: grid) {
+          margin-right: 0;
+        }
       }
+
+      &:last-child {
+        -ms-grid-column: 2;
+        margin-left: $space-half; //IE11
+
+        @supports (display: grid) {
+          margin-left: 0;
+        }
+      }
+
+    }
+
+    &.column-reverse {
+      .section-row-cell {
+        &:first-child {
+          order: 2;
+          -ms-grid-column: 2;
+          margin-right: 0; //IE11
+          margin-left: $space-half; //IE11
+
+          @supports (display: grid) {
+            margin-left: 0;
+          }
+        }
+
+        &:last-child {
+          -ms-grid-column: 1;
+          margin-left: 0; //IE11
+          margin-right: $space-half; //IE11
+
+          @supports (display: grid) {
+            margin-right: 0;
+          }
+        }
+      }
+
     }
   }
 
