@@ -1,7 +1,21 @@
+.wp-block-cloudblocks-section-row {
+  &:not(.height-full):not(.height-half):not(.height-one-third):not(.height-two-third) {
+    .wp-block-cloudblocks-section-row-inner-one-column.save {
+      height: 100%; // IE11
+    
+      @supports (display: grid) {
+        height: auto; // Reset IE11 fix
+      }
+    }
+  }
+}
+
 // The class name needs to match the names of the category and block
 .wp-block-cloudblocks-section-row-inner-one-column.save {
   display: flex; // IE11
   display: grid;
+
+
 
   &.height-full {
     height: 100%; // IE11 (TODO: Find another work arround due to issue when window is below height of content)

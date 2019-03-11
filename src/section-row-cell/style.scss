@@ -3,4 +3,5 @@
   display: flex;
   flex-direction: column;
   flex-basis: 100%; // IE11
+  max-width: inherit; // IE11
 }
