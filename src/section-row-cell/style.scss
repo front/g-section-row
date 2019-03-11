@@ -4,4 +4,16 @@
   flex-direction: column;
   flex-basis: 100%; // IE11
   max-width: inherit; // IE11
+
+  > * {
+    height: 100%,
+  }
+
+  > .wp-block-gallery.is-cropped {
+    .blocks-gallery-item {
+      img {
+        height: 100%;
+      }
+    }
+  }
 }
