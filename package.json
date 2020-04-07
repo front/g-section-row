@@ -1,6 +1,6 @@
 {
   "name": "@frontkom/section-row",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "description": "A collection of blocks that compose together to create flexible sections.",
   "main": "build/index.js",
   "gutenbergCloud": {
