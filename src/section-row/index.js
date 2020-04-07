@@ -7,6 +7,8 @@ import { element, i18n, components, editor } from 'wp';
 /**
  * Internal dependencies
  */
+import { getImageUrl } from '../helpers.js';
+
 import './style.scss';
 import './editor.scss';
 
@@ -239,12 +241,12 @@ export const settings = {
       )}`;
     }
 
-    const onSelectBgImage = ({
-      id,
-      sizes: {
-        large: { url },
-      },
-    }) => setAttributes({ backgroundImage: url, backgroundImageId: id });
+    const onSelectBgImage = media => {
+      setAttributes({
+        backgroundImage: getImageUrl(media, 'large'),
+        backgroundImageId: media.id,
+      });
+    };
 
     const onRemoveBgImage = () => {
       setAttributes({
