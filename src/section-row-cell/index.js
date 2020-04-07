@@ -107,7 +107,7 @@ export const settings = {
               label={__('Max Width')}
               help={__('Set max-width including unit of measure.')}
               value={maxWidth}
-              onChange={maxWidth => setAttributes({ maxWidth })}
+              onChange={value => setAttributes({ maxWidth: value })}
             />
           </PanelRow>
           <PanelBody title={__('Positioning')} initialOpen={false}>
@@ -117,9 +117,7 @@ export const settings = {
                 id="align-self"
                 value={alignSelf}
                 options={positionOptions}
-                onChange={alignSelf => {
-                  setAttributes({ alignSelf });
-                }}
+                onChange={value => setAttributes({ alignSelf: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -128,9 +126,7 @@ export const settings = {
                 id="justify-self"
                 value={justifySelf}
                 options={positionOptions}
-                onChange={justifySelf => {
-                  setAttributes({ justifySelf });
-                }}
+                onChange={value => setAttributes({ justifySelf: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -139,9 +135,7 @@ export const settings = {
                 id="align-items"
                 value={alignItems}
                 options={positionOptions}
-                onChange={alignItems => {
-                  setAttributes({ alignItems });
-                }}
+                onChange={value => setAttributes({ alignItems: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -150,9 +144,7 @@ export const settings = {
                 id="justify-content"
                 value={justifyContent}
                 options={distributeOptions}
-                onChange={justifyContent => {
-                  setAttributes({ justifyContent });
-                }}
+                onChange={value => setAttributes({ justifyContent: value })}
               />
             </PanelRow>
           </PanelBody>

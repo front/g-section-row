@@ -135,7 +135,7 @@ export const settings = {
                   { label: __('One to Four'), value: 'split-1-4' },
                   { label: __('Four to One'), value: 'split-4-1' },
                 ]}
-                onChange={split => setAttributes({ split })}
+                onChange={value => setAttributes({ split: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -144,7 +144,7 @@ export const settings = {
                 id="column-gap"
                 value={columnGap}
                 options={spaceOptions}
-                onChange={columnGap => setAttributes({ columnGap })}
+                onChange={value => setAttributes({ columnGap: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -165,7 +165,7 @@ export const settings = {
                 id="margin-top"
                 value={marginTop}
                 options={spaceOptions}
-                onChange={marginTop => setAttributes({ marginTop })}
+                onChange={value => setAttributes({ marginTop: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -174,7 +174,7 @@ export const settings = {
                 id="margin-bottom"
                 value={marginBottom}
                 options={spaceOptions}
-                onChange={marginBottom => setAttributes({ marginBottom })}
+                onChange={value => setAttributes({ marginBottom: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -185,7 +185,7 @@ export const settings = {
                 id="row-width"
                 value={width}
                 options={widthOptions}
-                onChange={width => setAttributes({ width })}
+                onChange={value => setAttributes({ width: value })}
               />
             </PanelRow>
           </PanelBody>

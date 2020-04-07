@@ -95,7 +95,7 @@ export const settings = {
                 id="margin-top"
                 value={marginTop}
                 options={spaceOptions}
-                onChange={marginTop => setAttributes({ marginTop })}
+                onChange={value => setAttributes({ marginTop: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -104,7 +104,7 @@ export const settings = {
                 id="margin-bottom"
                 value={marginBottom}
                 options={spaceOptions}
-                onChange={marginBottom => setAttributes({ marginBottom })}
+                onChange={value => setAttributes({ marginBottom: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -115,7 +115,7 @@ export const settings = {
                 id="row-width"
                 value={width}
                 options={widthOptions}
-                onChange={width => setAttributes({ width })}
+                onChange={value => setAttributes({ width: value })}
               />
             </PanelRow>
           </PanelBody>

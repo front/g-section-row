@@ -308,7 +308,7 @@ export const settings = {
                   { label: 'Div', value: 'div' },
                   { label: 'Section', value: 'section' },
                 ]}
-                onChange={htmlElement => setAttributes({ htmlElement })}
+                onChange={value => setAttributes({ htmlElement: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -319,7 +319,7 @@ export const settings = {
                 id="width"
                 value={width}
                 options={widthOptions}
-                onChange={width => setAttributes({ width })}
+                onChange={value => setAttributes({ width: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -328,7 +328,7 @@ export const settings = {
                 id="height"
                 value={height}
                 options={heightOptions}
-                onChange={height => setAttributes({ height })}
+                onChange={value => setAttributes({ height: value })}
               />
             </PanelRow>
             {height && (
@@ -356,8 +356,8 @@ export const settings = {
             colorSettings={[
               {
                 value: backgroundColor,
-                onChange: backgroundColor => {
-                  setAttributes({ backgroundColor });
+                onChange: value => {
+                  setAttributes({ backgroundColor: value });
                 },
                 label: __('Background Color'),
               },
@@ -367,8 +367,8 @@ export const settings = {
             <RangeControl
               label={__('Background color opacity')}
               value={backgroundColorOpacity}
-              onChange={backgroundColorOpacity =>
-                setAttributes({ backgroundColorOpacity })
+              onChange={value =>
+                setAttributes({ backgroundColorOpacity: value })
               }
               min={1}
               max={10}
@@ -379,8 +379,8 @@ export const settings = {
                 id="bg-position"
                 value={backgroundPosition}
                 options={bgPositionOptions}
-                onChange={backgroundPosition =>
-                  setAttributes({ backgroundPosition })
+                onChange={value =>
+                  setAttributes({ backgroundPosition: value })
                 }
               />
             </PanelRow>
@@ -390,7 +390,7 @@ export const settings = {
                 id="bg-size"
                 value={backgroundSize}
                 options={bgSizeOptions}
-                onChange={backgroundSize => setAttributes({ backgroundSize })}
+                onChange={value => setAttributes({ backgroundSize: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -404,7 +404,7 @@ export const settings = {
                 id="margin-top"
                 value={marginTop}
                 options={spaceOptions}
-                onChange={marginTop => setAttributes({ marginTop })}
+                onChange={value => setAttributes({ marginTop: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -413,7 +413,7 @@ export const settings = {
                 id="margin-bottom"
                 value={marginBottom}
                 options={spaceOptions}
-                onChange={marginBottom => setAttributes({ marginBottom })}
+                onChange={value => setAttributes({ marginBottom: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -422,7 +422,7 @@ export const settings = {
                 id="padding-top"
                 value={paddingTop}
                 options={spaceOptions}
-                onChange={paddingTop => setAttributes({ paddingTop })}
+                onChange={value => setAttributes({ paddingTop: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -431,7 +431,7 @@ export const settings = {
                 id="padding-bottom"
                 value={paddingBottom}
                 options={spaceOptions}
-                onChange={paddingBottom => setAttributes({ paddingBottom })}
+                onChange={value => setAttributes({ paddingBottom: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -446,7 +446,7 @@ export const settings = {
                   { label: __('Center'), value: 'center' },
                   { label: __('Bottom'), value: 'flex-end' },
                 ]}
-                onChange={justifyContent => setAttributes({ justifyContent })}
+                onChange={value => setAttributes({ justifyContent: value })}
               />
             </PanelRow>
           </PanelBody>

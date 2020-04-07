@@ -131,14 +131,14 @@ export const settings = {
             <RangeControl
               label={__('Columns')}
               value={columns}
-              onChange={columns => setAttributes({ columns })}
+              onChange={value => setAttributes({ columns: value })}
               min={1}
               max={10}
             />
             <RangeControl
               label={__('Gallery items')}
               value={galleryItems}
-              onChange={galleryItems => setAttributes({ galleryItems })}
+              onChange={value => setAttributes({ galleryItems: value })}
               min={2}
               max={40}
             />
@@ -148,7 +148,7 @@ export const settings = {
                 id="column-gap"
                 value={columnGap}
                 options={spaceOptions}
-                onChange={columnGap => setAttributes({ columnGap })}
+                onChange={value => setAttributes({ columnGap: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -157,7 +157,7 @@ export const settings = {
                 id="row-gap"
                 value={rowGap}
                 options={spaceOptions}
-                onChange={rowGap => setAttributes({ rowGap })}
+                onChange={value => setAttributes({ rowGap: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -168,7 +168,7 @@ export const settings = {
                 id="margin-top"
                 value={marginTop}
                 options={spaceOptions}
-                onChange={marginTop => setAttributes({ marginTop })}
+                onChange={value => setAttributes({ marginTop: value })}
               />
             </PanelRow>
             <PanelRow>
@@ -177,7 +177,7 @@ export const settings = {
                 id="margin-bottom"
                 value={marginBottom}
                 options={spaceOptions}
-                onChange={marginBottom => setAttributes({ marginBottom })}
+                onChange={value => setAttributes({ marginBottom: value })}
               />
             </PanelRow>
           </PanelBody>
@@ -188,7 +188,7 @@ export const settings = {
                 id="row-width"
                 value={width}
                 options={widthOptions}
-                onChange={width => setAttributes({ width })}
+                onChange={value => setAttributes({ width: value })}
               />
             </PanelRow>
           </PanelBody>
