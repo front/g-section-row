@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { element, i18n, components, editor } from 'wp';
+import { element, i18n, components, blockEditor } from 'wp';
 
 /**
  * Internal dependencies
@@ -15,7 +15,7 @@ const { __ } = i18n;
 
 const { PanelBody, PanelRow, SelectControl } = components;
 
-const { InspectorControls, InnerBlocks } = editor;
+const { InspectorControls, InnerBlocks } = blockEditor;
 
 const BLOCK_ATTRIBUTES = {
   width: {

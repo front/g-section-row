@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { element, i18n, components, editor } from 'wp';
+import { element, i18n, components, blockEditor } from 'wp';
 
 /**
  * Internal dependencies
@@ -33,7 +33,7 @@ const {
   PanelColorSettings,
   BlockControls,
   MediaUpload,
-} = editor;
+} = blockEditor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { element, i18n, components, editor } from 'wp';
+import { element, i18n, components, blockEditor } from 'wp';
 
 /**
  * Internal dependencies
@@ -15,7 +15,7 @@ const { __ } = i18n;
 
 // TODO: Chooose components for the sidebar settings
 const { PanelBody, PanelRow, SelectControl, TextControl } = components;
-const { InspectorControls, InnerBlocks } = editor;
+const { InspectorControls, InnerBlocks } = blockEditor;
 
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
