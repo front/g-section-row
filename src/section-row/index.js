@@ -35,6 +35,10 @@ const {
   MediaUpload,
 } = blockEditor;
 
+const ALLOWED_MEDIA_TYPES = ['video', 'image'];
+const IMAGE_BACKGROUND_TYPE = 'image';
+const VIDEO_BACKGROUND_TYPE = 'video';
+
 // TODO: Add here the editable block attributes
 const BLOCK_ATTRIBUTES = {
   width: {
@@ -93,6 +97,9 @@ const BLOCK_ATTRIBUTES = {
     type: 'bool',
     default: false,
   },
+  backgroundType: {
+    type: 'string',
+  },
 };
 
 const BackgroundImage = ({ style }) => (
@@ -101,6 +108,19 @@ const BackgroundImage = ({ style }) => (
 
 const BackgroundColor = ({ style }) => (
   <div className="background-color" style={style} />
+);
+
+const BackgroundVideo = ({ backgroundImage }) => (
+  <div className="background-video">
+    <video
+      autoPlay
+      loop
+      muted
+      playsinline
+    >
+      <source src={backgroundImage}></source>
+    </video>
+  </div>
 );
 
 const ALLOWED_BLOCKS = [
@@ -153,6 +173,7 @@ export const settings = {
       skipLink,
       htmlElement,
       justifyContent,
+      backgroundType,
     } = attributes;
 
     const spaceOptions = [
@@ -227,7 +248,7 @@ export const settings = {
     if (backgroundSize) {
       backgroundImgStyle.backgroundSize = backgroundSize;
     }
-    if (backgroundImage) {
+    if (backgroundType !== VIDEO_BACKGROUND_TYPE && backgroundImage) {
       backgroundImgStyle.backgroundImage = `url(${backgroundImage})`;
     }
 
@@ -241,17 +262,47 @@ export const settings = {
       )}`;
     }
 
-    const onSelectBgImage = media => {
+    const onSelectMedia = media => {
+      if (!media || !media.url) {
+        setAttributes({
+          backgroundImage: undefined,
+          backgroundImageId: undefined,
+          backgroundType: undefined,
+        });
+        return;
+      }
+
+      let mediaType;
+      if (media.media_type) {
+        if (media.media_type === IMAGE_BACKGROUND_TYPE) {
+          mediaType = IMAGE_BACKGROUND_TYPE;
+        }
+        else {
+          // only images and videos are accepted so if the media_type is not an image we can assume it is a video.
+          // Videos contain the media type of 'file' in the object returned from the rest api.
+          mediaType = VIDEO_BACKGROUND_TYPE;
+        }
+      }
+      else {
+        // for media selections originated from existing files in the media library.
+        if (media.type !== IMAGE_BACKGROUND_TYPE && media.type !== VIDEO_BACKGROUND_TYPE) {
+          return;
+        }
+        mediaType = media.type;
+      }
+
       setAttributes({
         backgroundImage: getImageUrl(media, 'large'),
         backgroundImageId: media.id,
+        backgroundType: mediaType,
       });
     };
 
-    const onRemoveBgImage = () => {
+    const onRemoveMedia = () => {
       setAttributes({
         backgroundImageId: null,
         backgroundImage: null,
+        backgroundType: null,
       });
     };
 
@@ -259,7 +310,8 @@ export const settings = {
       <Fragment>
         {/* Block markup (main editor) */}
         <div className={classes.join(' ')}>
-          {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
+          {backgroundType === VIDEO_BACKGROUND_TYPE && backgroundImage && <BackgroundVideo backgroundImage={backgroundImage} />}
+          {backgroundType !== VIDEO_BACKGROUND_TYPE && backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
           {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
           <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
           {skipLink && (
@@ -274,23 +326,22 @@ export const settings = {
         <BlockControls>
           <Toolbar>
             <MediaUpload
-              type="image"
-              onSelect={onSelectBgImage}
-              value={backgroundImageId}
+              onSelect={onSelectMedia}
               render={({ open }) => (
                 <IconButton
                   className="components-toolbar__control"
-                  label={__('Add/Edit background image')}
+                  label={__('Add/Edit background')}
                   icon="format-image"
                   onClick={open}
                 />
               )}
+              allowedTypes={ ALLOWED_MEDIA_TYPES }
             />
             {backgroundImageId && (
               <ToolbarButton
-                title={__('Remove background image')}
+                title={__('Remove background')}
                 icon="trash"
-                onClick={onRemoveBgImage}
+                onClick={onRemoveMedia}
               />
             )}
           </Toolbar>
@@ -363,7 +414,7 @@ export const settings = {
               },
             ]}
           />
-          <PanelBody title={__('Background Settings')} initialOpen={false}>
+          <PanelBody title={__('Background Image Settings')} initialOpen={false}>
             <RangeControl
               label={__('Background color opacity')}
               value={backgroundColorOpacity}
@@ -472,6 +523,7 @@ export const settings = {
       skipLink,
       htmlElement: HtmlElement,
       justifyContent,
+      backgroundType,
     } = attributes;
 
     const classes = [className];
@@ -507,7 +559,7 @@ export const settings = {
     if (backgroundSize) {
       backgroundImgStyle.backgroundSize = backgroundSize;
     }
-    if (backgroundImage) {
+    if (backgroundType !== VIDEO_BACKGROUND_TYPE && backgroundImage) {
       backgroundImgStyle.backgroundImage = `url(${backgroundImage})`;
     }
 
@@ -523,7 +575,8 @@ export const settings = {
 
     return (
       <HtmlElement className={classes.join(' ')}>
-        {backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
+        {backgroundType === VIDEO_BACKGROUND_TYPE && backgroundImage && <BackgroundVideo backgroundImage={backgroundImage} />}
+        {backgroundType !== VIDEO_BACKGROUND_TYPE && backgroundImage && <BackgroundImage style={backgroundImgStyle} />}
         {backgroundColor && <BackgroundColor style={backgroundColorStyle} />}
         <InnerBlocks.Content />
         {skipLink && (
